@@ -5,7 +5,7 @@ Long[] longArray = longArrayList.stream()
     .toArray(Long[]::new);
 
 String[] strings = list.stream().toArray(String[]::new);
-
+Employee[] employees = empList.stream().toArray(Employee[]::new);
 
 // Sum of elements
 
@@ -20,3 +20,26 @@ integers.values().stream().collect(Collectors.summingInt(Integer::intValue));
 
 integers.values().stream().reduce(0, Integer::sum);
 int sum = numbers.stream().reduce(0, (x,y) -> x+y);
+
+//Distinct
+intList.stream().distinct().collect(Collectors.toList());
+
+
+  public static int arraySum(int[][] array) {
+        int total = 0;
+
+        for (int row = 0; row < array.length; row++) {
+            total += array[row][row];
+
+        return total;
+    }
+
+    public static int arraySumrevertDiagonal(int[][] array) {
+        int total = 0;
+        for (int row = 0; row < array.length; row++) {
+            System.out.println(array[row][array.length - 1 - row]);
+            total += array[row][array.length - 1 - row];
+        }
+
+        return total;
+    }
