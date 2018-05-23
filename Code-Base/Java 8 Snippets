@@ -1,0 +1,22 @@
+// ArrayList to Array 
+
+Long[] longArray = longArrayList.stream()
+    .map(Long::new)
+    .toArray(Long[]::new);
+
+String[] strings = list.stream().toArray(String[]::new);
+
+
+// Sum of elements
+
+
+double total = DoubleStream.of(numbers).sum();
+double total2 = Arrays.stream(numbers).sum();
+
+
+
+integers.values().stream().mapToInt(Integer::intValue).sum();
+integers.values().stream().collect(Collectors.summingInt(Integer::intValue));
+
+integers.values().stream().reduce(0, Integer::sum);
+int sum = numbers.stream().reduce(0, (x,y) -> x+y);
