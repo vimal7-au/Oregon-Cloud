@@ -1,0 +1,12 @@
+@Test(timeout=2000)
+public void testSomeMethod(){
+   myObj.someMethod();
+}
+
+
+Instant start = Instant.now();
+
+Instant end = Instant.now();
+
+
+System.out.println(Duration.between(start, end));

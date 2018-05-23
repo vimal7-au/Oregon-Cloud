@@ -1,0 +1,50 @@
+Comparing the CLB and the ALB
+
+There are a number of features that are shared between both AWS load balancer offerings, and some that are specific to each.
+
+The following is a summary of key features and how they are supported in each offering:
+
+High Availability: 
+Incoming traffic can be distributed across multiple EC2 instances within an AZ, or traffic can be distributed across multiple AZs. The ELB will automatically scale capacity to handle the number of incoming requests. The Application Load Balancer automatically supports cross-zone load balancing, whereas you will need to enable it in the Classic Load Balancer, where it is disabled by default.
+Health Checks: Both load balancers have the ability to detect EC2 instance health. If the ELB detects an unhealthy instance, it will avoid sending traffic to the unhealthy instance or instances and instead send it to only healthy instances. In the case of ALB, you can specify a range of HTTP response codes that constitute a healthy response.
+
+Security Groups:
+Using a Virtual Private Cloud (VPC), you can create and manage security groups associated with instances and load balancers to provide additional security to your application stack.
+
+SSL Termination:
+Terminating your SSL on the ELB allows you to offload SSL processing from your application servers to the ELB. This will free up compute resources on your application servers, and also allow for a centralized place to manage SSL certs when they are put on ELBs.
+Sticky Sessions: Sticky sessions allow the load balancer to stick client sessions to specific backend EC2 instances with cookies. If a client makes a request to the ELB, it will be cookied, and the request routed to a specific backend server. All future requests from the client will be routed to the same backend server. This is useful when your application is stateful and requires specific client requests be routed to the same backend server each time.
+
+VPC:
+Both load balancer offerings have VPC support, but the Classic Load Balancer also supports EC2-Classic. The Application Load Balancer does not support EC2-Classic.
+
+Idle Connection Timeout:
+Both load balancers support configurable idle connection timeout, which terminates connections that exceed a time threshold where no data is sent between client and server. A configurable timeout is desirable when it takes backend servers longer to fulfill requests than the ELB default of 60 seconds.
+
+Connection Draining: 
+With connection draining, you can gracefully remove instances from the ELB without prematurely terminating client connections. This is supported in both the Classic and Application Load Balancer.
+
+Dynamic Port Mapping:
+Classic Load Balancer only supports fixed mappings between listener and target hosts. The Application Load Balancer supports dynamic port mapping using the EC2 Container Service.
+
+Protocols: 
+HTTP and HTTPS are supported by both ELBs. The Classic Load Balancer also supports TCP and SSL in addition to the above. Application Load Balancer supports HTTP/2 and WebSockets in addition to HTTP and HTTPS. TCP and SSL listeners are not currently supported by ALB.
+Backend Server Auth: Classic Load Balancer supports backend server auth. Application Load Balancer does not.
+Cloudwatch Metrics: CLB supports Cloudwatch Metrics. ALB supports an enhanced version, which provides for per port and per path monitoring of load balanced services, where a range of acceptable HTTP response codes are permissible. In contrast, Classic Load Balancer only allows for monitoring of a single port, with the HTTP 200 response code. ALB includes three additional Cloudwatch metrics: connections per hour, active connections, and overall traffic volume.
+
+Access Logs:  Classic Load Balancer supports ELB access logs. Application Load Balancer supports an
+enhanced version, that adds type of request (e.g. HTTP/HTTPS, HTTP/2 over SSL/TLS, WebSockets, and
+WebSockets over SSL/TLS), and the target Amazon Resource Name. Path-based routing: ALB supports
+path-based routing (covered earlier in this article). This feature is not supported by CLB. Deletion
+Protection: ALB supports deletion protection, whereas CLB does not.
+
+
+
+
+
+
+
+
+References :-
+
+	https://www.sumologic.com/aws/elb/aws-elastic-load-balancers-classic-vs-application/

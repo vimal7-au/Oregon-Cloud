@@ -1,0 +1,74 @@
+Aws:
+	Api Gateway
+	Kinesis Streams
+	Route 53
+	VPC
+	Security Group
+	ELB
+	Subnet
+	Nat-Gateway
+	Lambdas
+	CloudFront
+	SNS
+	SQS
+	EC2
+	ECS
+	CFN
+	Cloudwatch
+	DynamoDB
+	S3
+	IAM
+	ElasticSearch
+
+
+
+Terraform	
+
+	Plan
+	Apply
+	Destroy
+
+
+Elastic File System
+Elastic Block Store
+
+
+CName
+A-Record
+DNS Resolution
+
+Docker 
+	
+	- Swarm
+	- Compose
+
+Service-Discovery/AWS
+
+	- With ALB
+	- With Consul
+	- With Eureka
+
+
+Hystrix
+	- CircuitBreaker (properties)
+	- BulkHead ()
+
+AWS - CFN
+
+CompleteableFuture, Thread pool
+
+Consul provides, service discovery, health monitoring and config services.
+
+
+
+https://howtodoinjava.com/spring/spring-cloud/spring-hystrix-circuit-breaker-tutorial/
+http://www.baeldung.com/introduction-to-hystrix
+
+
+
+Service-Discovery
+https://medium.com/containers-on-aws/how-to-setup-service-discovery-in-elastic-container-service-3d18479959e6
+https://howtodoinjava.com/spring/spring-cloud/consul-service-registration-discovery/
+https://blog.trifork.com/2016/12/14/service-discovery-using-consul-and-spring-cloud/
+
+
