@@ -1,1 +1,24 @@
 VPC
+
+VPC :-
+
+
+A VPC spans all the Availability Zones in the region.
+
+Each subnet must reside entirely within one Availability Zone and cannot span zones. Availability Zones are distinct locations that are engineered to be isolated from failures in other Availability Zones. By launching instances in separate Availability Zones, you can protect your applications from the failure of a single location. We assign a unique ID to each subnet.
+
+
+If a subnet's traffic is routed to an internet gateway, the subnet is known as a public subnet. 
+
+If a subnet doesn't have a route to the internet gateway, but has its traffic routed to a virtual private gateway for a VPN connection, the subnet is known as a VPN-only subnet.
+
+
+The allowed block size is between a /28 netmask and /16 netmask.
+The CIDR block must not overlap with any existing CIDR block that's associated with the VPC.
+
+The CIDR block must not be the same or larger than the CIDR range of a route in any of the VPC route tables.
+
+
+Subnet Routing
+
+Each subnet must be associated with a route table, which specifies the allowed routes for outbound traffic leaving the subnet. Every subnet that you create is automatically associated with the main route table for the VPC.
