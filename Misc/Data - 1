@@ -1,0 +1,19 @@
+Data
+
+    String s1 = "HackerRank";
+         String s2 = "HackerHappy";
+
+         int iIndex = 0;
+         for (int i =0; i < s2.length(); i++) {
+             CharSequence charSequence = s1.subSequence(0, i);
+
+             if(s2.startsWith(charSequence.toString())){
+                 continue;
+             } else {
+                 iIndex = i - 1;
+                 System.out.println(i);
+                 break;
+             }
+
+
+         }
