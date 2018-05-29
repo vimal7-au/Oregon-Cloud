@@ -1,0 +1,9 @@
+Commands :
+
+Git Bash on Windows
+git config --global credential.helper wincred
+
+
+
+Mac :
+git config --global credential.helper cache
