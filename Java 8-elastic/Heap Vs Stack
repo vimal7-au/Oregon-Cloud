@@ -1,1 +1,33 @@
 Heap Vs Stack
+
+
+1) The main difference between heap and stack is that stack memory is used to store local variables and function call while heap memory is used to store objects in Java. No matter, where the object is created in code e.g. as a member variable, local variable or class variable,  they are always created inside heap space in Java.
+
+
+2) Each Thread in Java has their own stack which can be specified using -Xss JVM parameter, similarly, you can also specify heap size of Java program using JVM option -Xms and -Xmx where -Xms is starting size of the heap and -Xmx is a maximum size of java heap. to learn more about JVM options see my post 10 JVM option Java programmer should know.
+
+
+3) If there is no memory left in the stack for storing function call or local variable, JVM will throw java.lang.StackOverFlowError, while if there is no more heap space for creating an object, JVM will throw java.lang.OutOfMemoryError: Java Heap Space. Read more about how to deal with java.lang.OutOfMemoryError  in my post 2 ways to solve OutOfMemoryError in Java.
+
+
+4) If you are using Recursion, on which method calls itself, You can quickly fill up stack memory. Another difference between stack and heap is that size of stack memory is a lot lesser than the size of  heap memory in Java.
+
+
+5) Variables stored in stacks are only visible to the owner Thread while objects created in the heap are visible to all thread. In other words, stack memory is kind of private memory of Java Threads while heap memory is shared among all threads.
+
+
+
+
+
+Difference Between Heap vs Stack Memory :-
+
+1. Primitive Datatypes , and refferences to objects are store in Stack Memory.
+2. Each Object take space in Heap Memory.
+3. Stack memory is less than Heap Memory.
+4. Stack memory contains local varaibles for an application. Heap memory contains objects accessible
+ global in an application.
+5. In case of Stack memory, Variables are removed and memory space free for other variables and
+ function after end code excecution.
+   In case of Heap memory, if any one refference is pointing toward object then that
+ object will retain space in heap memory. When object has no refference available then object called dead object and
+ garbage collector will remove that object from heap memory to retain space for other objects.

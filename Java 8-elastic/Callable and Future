@@ -1,0 +1,38 @@
+Callable and Future:-
+
+
+Important points about Callable and Future
+1) Callable is a SAM type interface, so it can be used in lambda expression.
+ 
+2) Callable has just one method call() which holds all the code needs to executed asynchronously.
+ 
+3) In Runnable interface, there was no way to return the result of computation or throw checked exception but with Callable you can both return a value and can throw checked exception.
+ 
+4) You can use get() method of Future to retrieve result once computation is done. You can check if computation is finished or not by using isDone() method.
+ 
+5) You can cancel the computation by using Future.cancel() method.
+ 
+6) get() is a blocking call and it blocks until computation is completed.
+ 
+
+ 
+That's all about how to use Callable and Future object in Java. You can wrap asynchronous computation inside call() method and pass it to a single thread or thread pool for execution. you don't need to wait until execution complete, your thread can carry on with future object returned by call method. Once computation is done you can query the future object and get the result back.
+ 
+ 
+Read more: http://javarevisited.blogspot.com/2015/06/how-to-use-callable-and-future-in-java.html#ixzz4VnHeXiZC
+ 
+Pasted from <http://javarevisited.blogspot.com/2015/06/how-to-use-callable-and-future-in-java.html> 
+ 
+ 
+3. Future provides get() method to get result, which is blocking method and blocks until result is available to Future.
+ 
+4. Future interface also defines cancel() method to cancel task.
+ 
+5. isDone() and isCancelled() method is used to query Future task states. isDone() returns true if task is completed and result is available to Future. If you call get() method, after isDone() returned true then it should return immediately. On the other hand, isCancelled() method returns true, if this task is cancelled before its completion.
+ 
+6. Future has four sub interfaces, each with additional functionality e.g. Response, RunnableFuture, RunnableScheduledFuture and ScheduledFuture. RunnableFuture also implements Runnable and successful finish of run() method cause completion of this Future. 
+ 
+Read more: http://javarevisited.blogspot.com/2015/01/how-to-use-future-and-futuretask-in-Java.html#ixzz4VnImknYJ
+ 
+Pasted from <http://javarevisited.blogspot.com/2015/01/how-to-use-future-and-futuretask-in-Java.html> 
+ 

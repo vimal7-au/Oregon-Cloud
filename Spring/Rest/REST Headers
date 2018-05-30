@@ -1,0 +1,9 @@
+REST Headers
+
+
+Accept is like
+Here is my request and I would like (to Accept) this response format
+
+Content-Type is like
+Here is my request (or response) and this (Content-Type) is the format of the content I am sending in my request (or response)
+

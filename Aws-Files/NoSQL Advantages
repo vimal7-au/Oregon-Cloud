@@ -1,1 +1,50 @@
-NoSQL Advantages
+NoSQL Advantages :-
+
+
+
+When compared to relational databases, NoSQL databases are more flexible, scalable and also superior in the performance. Some of the top features and Advantages of NoSQL over relational databases are listed below.
+
+NoSQL database features
+
+Schema-agnostic: NoSQL helps to store information without doing up‐front schema design.
+
+Nonrelational: The information in NoSQL is stored in the form aggregate. A single record store every information about the transaction, including the delivery address.
+
+Commodity hardware: NoSQL database is cheap and adding lower cost servers allows NoSQL databases to handle and scale more data.
+
+Highly distributable: NoSQL uses the powerful, efficient architecture instead of the expensive monolithic architecture. The cluster of servers in NoSQL database can be used to hold a single large database.
+
+Advantages of NoSQL over relational databases
+
+Elastic Scaling
+
+The database administrators are always relying on a scale up. Purchasing the bigger servers as the database will increase load rather than scale out. The RDBMS will not scale out easily on commodity clusters. One of the major advantages of the new breed of NoSQL databases is there are designed in such a way that there expand transparently to take advantage of new nodes, which significantly reduces the cost of commodity hardware.
+
+Sizable Data
+
+The transaction rates are growing tremendously in the current trend, hence the data that are being stored are also increased immensely. RDBMS capacity is increasing immensely to match this growth, but the data volume managed by a single RDBMS becoming impossible for some companies. This drawback can be overcome by NoSQL as NoSQL systems helps to handle large volume data such as Hadoop, outstrip which can be healed only by biggest RDBMS.
+
+Flexible Data Models
+
+One of the major problems associated with RDBMS is Change management. Even the smallest change associated with RDBMS data model should be carefully managed otherwise it reduces service levels. Whereas a NoSQL data model has fewer restrictions. Even the more rigidly defined BigTable-based NoSQL databases easily allow new column creation without creating much fuss.
+
+Cost Effective
+
+RDBMS rely on overpriced storage and proprietary server systems. While NoSQL databases commonly rely on clusters of cheap commodity servers to administer the tremendous data and transaction volumes. As the result, NoSQL is cost effective compared to RDBMS and allows to process and store more data at a much lower cost.
+
+
+ABILITY TO SCALE HORIZONTALLY ON COMMODITY HARDWARE
+NoSQL databases handle partitioning (sharding) of a database across several servers. So, if your data storage requirements grow too much, you can continue to add inexpensive servers and connect them to your database cluster (horizontal scaling) making them work as a single data service.
+
+
+
+SUPPORT FOR MULTIPLE DATA STRUCTURES
+Many applications need simple object storage, whereas others require highly complex and interrelated structure storage. NoSQL databases provide support for a range of data structures.
+
+Simple binary values, lists, maps, and strings can be handled at high speed in key-value stores.
+
+Related information values can be grouped in column families within Bigtable clones.
+
+Highly complex parent-child hierarchal structures can be managed within document databases.
+
+A web of interrelated information can be described flexibly and related in triple and graph stores
