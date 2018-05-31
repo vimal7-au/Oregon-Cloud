@@ -1,0 +1,26 @@
+Cores And Threads
+
+
+
+Processes vs Threads
+
+In days of old, each process had precisely one thread of execution, so processes were scheduled onto cores directly (and in these old days, there was almost only one core to schedule onto). However, in operating systems that support threading (which is almost all moderns OS's), it is threads, not processes that are scheduled. So for the rest of this discussion we will talk exclusively about threads, and you should understand that each running process has one or more threads of execution.
+
+Parallelism vs Concurrency
+
+When two threads are running in parallel, they are both running at the same time. For example, if we have two threads, A and B, then their parallel execution would look like this:
+
+CPU 1: A ------------------------->
+
+CPU 2: B ------------------------->
+
+When two threads are running concurrently, their execution overlaps. Overlapping can happen in one of two ways: either the threads are executing at the same time (i.e. in parallel, as above), or their executions are being interleaved on the processor, like so:
+
+CPU 1: A -----------> B ----------> A -----------> B ---------->
+
+So, for our purposes, parallelism can be thought of as a special case of concurrency*
+
+
+
+
+In this case, they can run concurrently because the CPU scheduler is giving each one of those 30 threads some share of CPU time. Some threads will be running in parallel (if you have 4 cores, then 4 threads will be running in parallel at any one time), but all 30 threads will be running concurrently. The reason you can then go play games or browse the web is that these new threads are added to the thread pool/queue and also given a share of CPU time.
