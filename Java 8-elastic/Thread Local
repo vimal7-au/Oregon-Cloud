@@ -1,0 +1,16 @@
+Thread Local
+
+ThreadLocal is a specially provisioned functionality by JVM to provide an isolated storage space for threads only.
+like the value of instance scoped variable are bound to a given instance of a class only. 
+each object has its only values and they can not see each other value. so is the concept of ThreadLocal variables, 
+they are local to the thread in the sense of object instances other thread except for the one which created it, can not see it.
+
+
+Like request, session and application scope of any Object, We can define a Thread Scope of any Object thus Object visibility would be only within the Thread and Every Thread has it execution life cycle, After a thread goes away, all of its copies of thread-local instances are subject to garbage collection (unless other references to these copies exist).
+
+Although we usually create a Synchronize  Object for Thread safety in MultiThread application therefore only one Thread can be obtained a monitor to access shared Object Since shared Object is not thread safe.
+
+
+http://www.baeldung.com/java-threadlocal
+https://itexpertsconsultant.wordpress.com/2017/05/29/threadlocal-example-with-java-8/
+https://netjs.blogspot.com/2015/07/when-and-how-to-use-thread-local-class-in-java.html

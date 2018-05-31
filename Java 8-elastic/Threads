@@ -1,0 +1,5 @@
+Threads
+
+
+Sleep Vs Wait :
+One key difference is that while sleeping a Thread does not release the locks it holds, while waiting releases the lock on the object that wait() is called on.
