@@ -1,0 +1,214 @@
+Rest Api Design Considerations:-
+
+1) Provide Links for Navigating through your API (HATEOAS)
+Hypermedia as the Engine of Application State is a principle that hypertext links should be used to create a better navigation through the API.
+A hypermedia-driven site provides information to navigate the site’s REST interfaces dynamically by including hypermedia links with the responses.
+A HATEOAS-based response would look like this:
+{
+    "name": "Alice",
+    "links": [ {
+        "rel": "self",
+        "href": "http://localhost:8080/customer/1"
+    } ]
+}
+This response not only has the person’s name, but includes the self-linking URL where that person is located.
+	• rel means relationship. In this case, it’s a self-referencing hyperlink. For example, an order might have a “rel”:”customer” relationship, linking the order to its customer.
+	• href is a complete URL that uniquely defines the resource.
+
+	2) Error Handling
+	3)  Use content-type header
+	As you know everyday new format are created and used, recently XML was the format choice of the web server, but then JSON came along.
+	So, to keep your API flexible and extendable for future, it is important that we should build API for future not for today.
+	By taking advantage of content-type header we can define the request format and in return we can send back the same format.
+	For example, if a user sends a request using text/xml, you could send back an XML response while another user could send an application/JSON request and you could reply with JSON.
+	By building this functionality into your API, you are able to adapt to these new format requests without impacting other users, or other aspects of your API.
+	This also means that you can stay on top of the technology curve without worrying about having to migrate users from one format to another, or from one API to another.
+	4) Use sub-resources for relations
+	Sub resources are used to link one resource with another, so use sub resources to represent the relation.
+	GET /groups/{group id}/members	Returns a list of members in group with given id
+	GET/groups/{groupid}/members/{member id}	Returns user with given user id for given group id
+	Example
+	GET /cars/711/drivers/ Returns a list of drivers for car 711
+	GET /cars/711/drivers/4 Returns driver #4 for car 711
+	
+	Verbs
+	Surely you know about GET and POST requests. These are the two most commonly requests used when your browser visits different webpages. The term POST is so popular that it has even invaded common language, where people who know nothing about how the Internet works do know they can “post” something on a friends Facebook wall.
+	There are four and a half very important HTTP verbs that you need to know about. I say “and a half”, because the PATCH verb is very similar to the PUT verb, and two two are often combined by many an API developer. Here are the verbs, and next to them are their associated database call (I’m assuming most people reading this know more about writing to a database than designing an API).
+	• GET (SELECT): Retrieve a specific Resource from the Server, or a listing of Resources.
+	• POST (CREATE): Create a new Resource on the Server.
+	• PUT (UPDATE): Update a Resource on the Server, providing the entire Resource.
+	• PATCH (UPDATE): Update a Resource on the Server, providing only changed attributes.
+	• DELETE (DELETE): Remove a Resource from the Server.
+	Here are two lesser known HTTP verbs:
+	• HEAD – Retrieve meta data about a Resource, such as a hash of the data or when it was last updated.
+	• OPTIONS – Retrieve information about what the Consumer is allowed to do with the Resource.
+	A good RESTful API will make use of the four and a half HTTP verbs for allowing third parties to interact with its data, and will never include actions / verbs as URL segments.
+	Typically, GET requests can be cached (and often are!) Browsers, for example, will cache GET requests (depending on cache headers), and will go as far as prompt the user if they attempt to POST for a second time. A HEAD request is basically a GET without the response body, and can be cached as well.
+	Versioning
+	No matter what you are building, no matter how much planning you do beforehand, your core application is going to change, your data relationships will change, attributes will invariably be added and removed from your Resources. This is just how software development works, and is especially true if your project is alive and used by many people (which is likely the case if you’re building an API).
+	Remember than an API is a published contract between a Server and a Consumer. If you make changes to the Servers API and these changes break backwards compatibility, you will break things for your Consumer and they will resent you for it. Do it enough, and they will leave. To ensure your application evolves AND you keep your Consumers happy, you need to occasionally introduce new versions of the API while still allowing old versions to be accessible.
+	As a side note, if you are simply ADDING new features to your API, such as new attributes on a Resource (which are not required and the Resource will function without), or if you are ADDING new Endpoints, you do not need to increment your API version number since these changes do not break backwards compatibility. You will want to update your API Documentation (your Contract), of course.
+	Over time you can deprecate old versions of the API. To deprecate a feature doesn’t mean to shut if off or diminish the quality of it, but to tell Consumers of your API that the older version will be removed on a specific date and that they should upgrade to a newer version.
+	A good RESTful API design will keep track of the version in the URL. The other most common solution is to put a version number in a request header, but after working with many different Third Party Developers, I can tell you that adding headers is no where near as easy as adding a URL Segment.
+	
+	Pasted from <https://codeplanet.io/principles-good-restful-api-design/> 
+	
+	Status Codes
+	It is very important that as a RESTful API, you make use of the proper HTTP Status Codes; they are a standard after all! Various network equipment is able to read these status codes, e.g. load balancers can be configured to avoid sending requests to a web server sending out lots of 50x errors. There are a plethora of HTTP Status Codes to choose from, however this list should be a good starting point:
+	• 200 OK – [GET]
+	• The Consumer requested data from the Server, and the Server found it for them (Idempotent)
+	• 201 CREATED – [POST/PUT/PATCH]
+	• The Consumer gave the Server data, and the Server created a resource
+	• 204 NO CONTENT – [DELETE]
+	• The Consumer asked the Server to delete a Resource, and the Server deleted it
+	• 400 INVALID REQUEST – [POST/PUT/PATCH]
+	• The Consumer gave bad data to the Server, and the Server did nothing with it (Idempotent)
+	• 404 NOT FOUND – [*]
+	• The Consumer referenced an inexistant Resource or Collection, and the Server did nothing (Idempotent)
+	• 500 INTERNAL SERVER ERROR – [*]
+	• The Server encountered an error, and the Consumer has no knowledge if the request was successful
+	Status Code Ranges
+	The 1xx range is reserved for low-level HTTP stuff, and you’ll very likely go your entire career without manually sending one of these status codes.
+	The 2xx range is reserved for successful messages where all goes as planned. Do your best to ensure your Server sends as many of these to the Consumer as possible.
+	The 3xx range is reserved for traffic redirection. Most APIs do not use these requests much (not nearly as often as the SEO folks use them ;), however, the newer Hypermedia style APIs will make more use of these.
+	The 4xx range is reserved for responding to errors made by the Consumer, e.g. they’re providing bad data or asking for things which don’t exist. These requests should be be idempotent, and not change the state of the server.
+	The 5xx range is reserved as a response when the Server makes a mistake. Often times, these errors are thrown by low-level functions even outside of the developers hands, to ensure a Consumer gets some sort of response. The Consumer can’t possibly know the state of the server when a 5xx response is received, and so these should be avoidable.
+	
+	Pasted from <https://codeplanet.io/principles-good-restful-api-design/> 
+	
+	5) Security Considerations
+	• Always use SSL
+	• APIs are stateless, so avoid session/cookie management – authenticate each request
+	• Authorize based on resource, not on URL
+	• HTTP status code 401 vs. 403: Some may prefer to use code 401 rather than 403 to indicate that either authentication or authorization failed
+	• Follow the guidelines defined by Open Web Application Security Project (OWASP) Threat Protection
+	Possible Authentication Schemes:
+	Basic Authentication	•         Must be on SSL only
+		•         Encoded using Base64 and sent in Authorization request header
+		•         Ideal to use within secured networks
+	SAML	•         Transport agnostic, can be used with HTTP, SOAP or JMS
+		•         Ideal for B2B enterprise applications
+	OAuth	•         Uses only HTTP
+		•         Ideal for consumer facing applications that authorize data for 3rd party access
+		•         OAuth 2.0 with bearer tokens is ideal for mobile applications
+	JSON Web Token (JWT)	•         Compact, transmission is fast
+		•         Can be sent through URL query parameter, POST parameter or inside HTTP header
+	
+	
+	3. Less Is More: Always Paginate Your Results
+	Most modern API have come across this functionalities of setting the parameter in resources because we can’t return hundred or thousand of records when it come to fast and responsive UIs.
+	For that reason we need pagination mechanism to make sure the responses are easier to handle.
+	
+	Pasted from <https://www.snyxius.com/blog/21-best-practices-designing-launching-restful-api/#.WKEhrODyuVO> 
+	
+	
+	6) Caching and Concurrency Control
+	Caching improves performance, thereby providing faster access to frequently accessed resources and eliminating the load on backend services. However, with caching comes the challenge of managing concurrent access. Therefore, it is essential to manage the caching in a better way using HTTP standards such as:
+	• ETag – Entity tagging. Equivalent to versioning each entity for updates
+	• Last-Modified – Contains the last modified timestamp
+	
+	
+	7) Standard Response Codes
+	This responsibility lies with business owners as it affects the business needs of consumers of your APIs. The contract definition should contain all possible error codes that could occur with each API.
+	• Adhere to the standard HTTP response codes
+	• Include both business and developer messages. Developer messages should be optional, and contain technical messages that guide debugging and troubleshooting techniques.
+	• Due to security reasons, do not reveal too much about the request (to avoid Cross-Site Request Forgery).
+	• Best practice is to limit the list of potential error codes, as too many error codes leads to chaos.
+	
+	Pasted from <http://www.ness.com/api-series-part-2-key-api-design-principles-best-practices/> 
+	
+	API Root URL
+	The root location of your API is important, believe it or not. When a developer (read as code archaeologist) inherits an old project using your API and needs to build new features, they may not know about your service at all. Perhaps all they know is a list of URLs which the Consumer calls out to. It’s important that the root entry point into your API is as simple as possible, as a long complex URL will appear daunting and can turn developers away.
+	Here are two common URL Roots:
+	• https://example.org/api/v1/*
+	• https://api.example.com/v1/*
+	If your application is huge, or you anticipate it becoming huge, putting the API on its own subdomain (e.g. api.) is a good choice. This can allow for some more flexible scalability down the road.
+	If you anticipate your API will never grow to be that large, or you want a much simpler application setup (e.g. you want to host the website AND API from the same framework), placing your API beneath a URL segment at the root of the domain (e.g. /api/) works as well.
+	It’s a good idea to have content at the root of your API. Hitting the root of GitHub’s API returns a listing of endpoints, for example. Personally, I’m a fan of having the root URL give information which a lost developer would find useful, e.g., how to get to the developer documentation for the API.
+	Also, notice the HTTPS prefix. As a good RESTful API, you must host your API behind HTTPS.
+	Endpoints
+	Rate limiting
+	If your API is success then thousands of users will integrate to your API, things can and will go wrong: Inexperienced developers will call you thousands of times per hour.
+	Then you should consider implementing rate limit early on.
+	By implementing rate limit to your API you can protect server from being overloaded and maintain high quality of service to clients.
+	At a minimum, include the following headers.
+		• X-Rate-Limit-Limit- The number of allowed requests in the current period
+		• X-Rate-Limit-Remaining – The number of remaining requests in the current period
+		• X-Rate-Limit-Reset – The number of seconds left in the current period
+	14. Use PUT on element- URL for updating resources
+	
+		• The client sends a PUT request to the element URL /employee/21. The HTTP body of the request contains the updated attribute values (the new name “Bruce” of the employee 21).
+		• The REST service updates the name of the employee with the ID 21 and confirms the changes with the HTTP status code 200
+	15. Use POST on collection-URL for creating a new resource
+	
+		• The client sends a POST request to the collection URL /employees. The HTTP body contains the attributes of the new resource “Harry Porter”.
+		• The RESTFUL web service generates an ID for the new employee, creates the employee in its internal model and sends a response to the client.
+		• This response contains a Location HTTP header that indicates the URL under which the created resource is accessible.
+	16. Use camelCase for Attribute names
+	To avoid the naming limitation, use CamelCase.
+	CamelCase is a naming convention in which a name is formed of multiple words that are joined together as a single word with the first letter of each of the multiple words capitalized so that each word that makes up the name can easily be read.
+	The camelCase will look like this:
+	{ "yearOfBirth": 1982 }
+	Reason behind using Camelcase
+	JavaScript convention read those JavaScript code which do not use Underscores for example (“year_of_birth”) or capitalize (“YearOfBirth”).
+	That RESTful web service will be consumed by a client written in JavaScript.
+	Typically Client will convert the JSON response to a JavaScript object (bycalling var person = JSON.parse(response) ) and call its attributes.
+	Therefore, it’s a good idea to stick to the JavaScript convention which makes the JavaScript code more readable and intuitive.
+	17. Use verb for non-resources
+	Sometimes a response to an API call doesn’t involve resources (like calculate, translate or convert).
+	Example:
+	GET /translate?from=de_DE&to=en_US&text=Hallo
+	GET /calculate?para2=23&para2=43
+	In this case, your API doesn’t return any resources. Instead, you execute an operation and return the result to the client. Hence, you should use verbs instead of nouns in your URL to distinguish clearly the non-resource responses from the resource-related responses.
+	18. Use content-type header
+	As you know everyday new format are created and used, recently XML was the format choice of the web server, but then JSON came along.
+	So, to keep your API flexible and extendable for future, it is important that we should build API for future not for today.
+	By taking advantage of content-type header we can define the request format and in return we can send back the same format.
+	For example, if a user sends a request using text/xml, you could send back an XML response while another user could send an application/JSON request and you could reply with JSON.
+	By building this functionality into your API, you are able to adapt to these new format requests without impacting other users, or other aspects of your API.
+	This also means that you can stay on top of the technology curve without worrying about having to migrate users from one format to another, or from one API to another.
+	
+	Pasted from <https://www.snyxius.com/blog/21-best-practices-designing-launching-restful-api/#.WJfct-DythF> 
+	
+	An Endpoint is a URL within your API which points to a specific Resource or a Collection of Resources.
+	If you were building a fictional API to represent several different Zoo’s, each containing many Animals (with an animal belonging to exactly one Zoo), employees (who can work at multiple zoos) and keeping track of the species of each animal, you might have the following endpoints:
+	• https://api.example.com/v1/zoos
+	• https://api.example.com/v1/animals
+	• https://api.example.com/v1/animal_types
+	• https://api.example.com/v1/employees
+	
+	Pasted from <https://codeplanet.io/principles-good-restful-api-design/> 
+	
+	Use the custom HTTP Header X-HTTP-Method
+	As you know some proxies only support POST and GET method, and we know that it’s difficult to support API with this limitation.
+	So, to override this POST and GET method, use the custom HTTP Header X-HTTP-METHOD-Override.
+	9. Create Fine-Grained Resources
+	When starting out, it’s much easier to create APIs that mimic the underlying application domain or database architecture of your system.
+	Eventually, you’ll want aggregate services—services that utilize multiple underlying resources to reduce chattiness.
+	But it’s much easier to create larger resources later from individual resources than it is to create fine-grained or individual resources from larger aggregates.
+	Make it easy on yourself and start with small, easily defined resources, providing CRUD functionality on those. You can create those use-case-oriented, chattiness-reducing resources later.
+	
+	Pasted from <https://www.snyxius.com/blog/21-best-practices-designing-launching-restful-api/#.WJfct-DythF> 
+	
+	Result filtering and sorting
+	Another consideration for affecting results is the act of filtering data and/or ordering it on the server, retrieving a subset of data and/or in a specified order.
+	These concepts work in conjunction with pagination and results-limiting and utilize query-string parameters, filter and sort respectively, to do their magic.
+	Again, filtering and sorting are complex operations and don’t need to be supported by default on all resources. Document those resources that offer filtering and sorting.
+	Filtering
+	Filtering is defined as reducing the number of results returned by specifying some criteria that must be met on the data before it is returned.
+	Filtering can get quite complex if services support a complete set of comparison operators and complex criteria matching.
+	However, it is quite often acceptable to keep things sane by supporting a simple equality, ‘starts-with’ or contains comparison.
+	For example:
+	GET /groups?status=active – Returns a list of active groups
+	Sorting
+	Sorting is defined as determining the order in which items in a payload are returned from a service. In other words, the sort order of multiple items in a response payload.
+	For example,
+	GET /groups?sort=status,-name – Returns list of groups in ascending order of status; Within the same status, groups returned will be sorted by name in descending order.
+	
+	Pasted from <https://www.snyxius.com/blog/21-best-practices-designing-launching-restful-api/#.WJfct-DythF> 
+	
+	
+	
+	
+
+

@@ -6,7 +6,8 @@ Important points about Callable and Future
  
 2) Callable has just one method call() which holds all the code needs to executed asynchronously.
  
-3) In Runnable interface, there was no way to return the result of computation or throw checked exception but with Callable you can both return a value and can throw checked exception.
+3) In Runnable interface, there was no way to return the result of computation or throw checked exception but with Callable
+ you can both return a value and can throw checked exception.
  
 4) You can use get() method of Future to retrieve result once computation is done. You can check if computation is finished or not by using isDone() method.
  

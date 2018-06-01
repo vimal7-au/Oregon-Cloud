@@ -23,3 +23,8 @@ Hypermedia promotes service longevity by decoupling the consumer of a service
 from intimate knowledge of that service’s surface area and topology.
 It describes REST services. The service can answer questions about what to call, 
 and when. We’ll look at this in depth later.
+
+
+
+
+Pasted from <https://spring.io/guides/tutorials/bookmarks/> 
