@@ -1,0 +1,359 @@
+Marketplace is a customer facing portal which:
+collects and displays a customer's Suncorp Group products (e.g. Insurance and Banking) in a single place
+provides access to information, offers and rewards
+
+Suncorp Marketplace is a digital platform which:
+collates and displays a customer's portfolio of Suncorp Group insurance and banking products across a range of brands in a single place
+provides access to a range of products, tools and services from across the Suncorp Group.
+provides seamless access between insurance and banking self service accounts when linked.
+
+
+
+
+Skip to content
+Skip to breadcrumbs
+Skip to header menu
+Skip to action menu
+Skip to quick search
+Linked Applications
+Confluence
+Spaces 
+People
+ 
+Questions
+ 
+Calendars
+ Create Create
+Quick Search
+Help
+8
+
+
+Digital Market Place
+Digital Market Place
+
+Blog
+Questions
+Calendars
+SPACE SHORTCUTS
+How To Articles
+CHILD PAGES
+Marketplace (OSP)
+Suncorp Marketplace
+Create child page
+ConfigureSpace tools
+Suncorp Marketplace
+ Edit  Save for later  Watch  Share
+Pages … Marketplace (OSP)
+Skip to end of banner
+Go to start of banner
+Skip to end of metadata
+Created by FITZMAURICE, Sean, last modified by NEILL, Mitchell on 20 Oct 2017 Go to start of metadata
+Purpose
+The purpose of this document is to provide an overview of Suncorp Marketplace.
+Scope
+The scope of this document is limited to a description of the brands, products and other content displayed in Suncorp Marketplace.
+Introduction
+Suncorp Marketplace is a digital platform which:
+collates and displays a customer's portfolio of Suncorp Group insurance and banking products across a range of brands in a single place
+provides access to a range of products, tools and services from across the Suncorp Group.
+provides seamless access between insurance and banking self service accounts when linked.
+Below are desktop and mobile images of Suncorp Marketplace.
+Home - Insurance Portfolio (Desktop)                       
+        
+Home - Banking Portfolio (Desktop)
+ 
+Home - Insurance Portfolio (Mobile)
+
+Access 
+Suncorp Marketplace is automatically displayed when a user successfully logs onto their Suncorp insurance self service account.
+Implementation
+Implementation of Suncorp Marketplace is planned for July 2017.  Suncorp Marketplace will be the second marketplace implementation following on from AAMI Marketplace in February 2017.
+About
+Suncorp Marketplace is an extension of AAMI Marketplace. It has additional functionality and format & content changes have been applied. Following is a summary of these changes:
+Functional Changes
+Suncorp Marketplace becomes the new landing page when a user successfully logs onto Suncorp self service. From Suncorp Marketplace both Policy Self Service (PSS) and My Claim Manager (MCM) can be accessed.
+Display of Suncorp brand claims for Marketplace supported insurance policies. Note only in-progress and report only claims are displayed. Finalised/closed claims are not displayed.
+Ability to link insurance self service and internet banking self-service accounts. Once linked this will allow seamless access from insurance self service to internet banking without having to re-enter internet banking credentials.  
+Format Changes 
+Insurance and banking portfolios now displayed on seperate tabs. The insurance tab is displayed by default.
+Display of insurance policy data in the portfolio summary has been re-styled.
+New Suncorp styleguide has been applied to Suncorp Marketplace. AAMI Marketplace has the old Suncorp styleguide applied to it.
+Content Changes 
+Different hero banner sub-text.
+Different marketing offers.
+Different carousels with different tools and services.
+On-boarding carousel removed.
+Features
+Following is a description of Suncorp Marketplace features.
+1	
+Listing of In-Scope Insurance Policy Types Across a Range Brands
+The brands and policies eligible for display in Suncorp Marketplace are as per the below table.
+When accessing Suncorp Marketplace for the first time a customer:
+will automatically be displayed Suncorp policies already viewable in Policy Self Service that are eligible for display in Suncorp Marketplace.
+will need to manually add eligible policies for other brands in order to view them. Refer section 10 below for details on adding a policy.
+ 
+BRAND
+CAR
+HOME
+LANDLORD
+CTP
+1	AAMI	Y	Y	Y	Y
+2	APIA	Y	Y	Y	Y
+3	BINGLE	Y	 	 	 
+4	GIO	Y	Y	Y	Y
+5	SHANNONS	Y	Y	 	Y
+6	SUNCORP	Y	Y	Y	Y
+Car - Comprehensive, Third Party Property & Third Party Fire & Theft covers.
+Home - Standard home & content covers. Non standard Apia home covers not displayed e.g. Village Style, Apartment Style, Assisted Living etc.
+CTP - NSW & QLD only. SA & ACT not displayed.
+Optional covers are not displayed.
+Policies are ordered by brand and then cover type as per below:
+Brand: AAMI / Suncorp / GIO / APIA / Shannons / Bingle
+Cover type: Home / Landlord / Car / CTP
+An alert is displayed when there are other policies that can be displayed together with an 'Add a policy' button so that a policy can be added. Refer section 10 below for details on adding a policy.
+An alert is displayed when a policy is 'renewal due' or 'renewal overdue' together with a hyperlink to the online payments application.
+When the cursor hovers over a policy the background colour of the policy changes to indicate the cursor focus.
+Policies are displayed first unless claim data is present. When claim data is present claims are displayed first.
+For details of the insurance product codes supported in Marketplace refer to the attached spreadsheet - Supported Products.xlsx. 
+
+2	
+Specific Policy Information
+Additional policy information can be displayed from by selecting a policy in the listing.
+The following policy data is displayed:
+ 
+POLICY DATA
+COMMENT
+1	Description of Insured Risk	Displayed in page header. All policy types.
+2	Policy Number	All policy types except QLD CTP. For QLD CTP the CTP certificate number is displayed.
+3	Policy Type	All policy types
+4	Payment Frequency	AAMI & Suncorp brands only
+5	Contact Preference	Electronic Notice Distribution (END) preference. All brands except Shannons. If none provided field not displayed.
+6	Registration Number	Car & CTP policy types only. If none provided field is not displayed.
+The following links are displayed:
+ 
+LINK NAME
+LINKS TO
+COMMENT
+1	Make a claim	<brand> Claim Online	All policy types except CTP
+2	View & update policy details	<brand> Policy Self Service 'Policy List' page	All policy types except CTP
+3	View policy documents	'Policy Documents' page of main <brand> website	All policy types except CTP
+4	Contact <brand>	'Contact' page of main <brand> website	CTP policy type only
+
+
+ 
+ 
+3	
+Listing of Insurance Claims on In-Scope Suncorp Brand Policy Types
+Claim data, when present, is displayed before policy data.
+Only Suncorp brand insurance claims on the above policy types are displayed except for CTP claims which are not displayed. 
+Only 'in progress' and 'report only' claims are displayed. Display of the claim status is planned for a later delivery.
+A claim in the list can be selected. When an:
+'in progress' claim is selected Claim Self Service (My Claim Manager) is automatically opened in a new tab without having to login again
+'report only' claim is selected text indicating the claim has been lodged is displayed
+When the cursor hovers over a claim the background colour of the claim changes to indicate the cursor focus.
+
+4	
+Listing of In-Scope Suncorp Bank Accounts
+The banking accounts displayed in Suncorp Marketplace are as per the below table
+When accessing Suncorp Marketplace for the first time a customer will need to manually add eligible accounts.
+ 
+PRODUCT NAME
+1	eOptions
+2	Everyday Basics
+3	Everyday Options
+4	Everyday Essentials
+5	55 Plus
+ 
+A alert is displayed when there are other accounts eligible to be displayed together with an 'Add a account' button so that an account can be added.
+For details of bank product codes supported in Marketplace refer to the attached spreadsheet - Supported Products.xlsx. 
+
+5	
+Suncorp Group Product Offers
+Offers are displayed adjacent to the portfolio summary with links to each. The offers are:
+Health insurance
+Combining Suncorp bank and insurance products to save
+ 
+ 
+ 
+ 
+
+6	
+'Do More With Your Money' Carousel
+A 'Do more with your money' carousel comprising five Suncorp Group financial products, tools or services with links to each.
+The carousel components are:
+ 
+COMPONENT
+URL
+1	What's your money profile	https://moneyprofile.suncorp.com.au/
+2	Savings accounts	https://www.suncorp.com.au/banking/bank-accounts/savings-accounts.html
+3	Budget planner	https://www.suncorp.com.au/banking/budget-planner-calculator.html
+4	Financial planning	https://www.suncorp.com.au/banking/help-support/financial-planning.html
+5	Savings calculator	https://www.suncorp.com.au/banking/account-savings-calculator.html
+The carousel can be scrolled right or left. When scrolled it will advance one component at a time.
+
+7	
+'Protect What Matters' Carousel
+A 'Protect what matters' carousel comprising four Suncorp Group insurance products or tools with links to each.  
+The carousel components are:
+ 
+COMPONENT
+URL
+1	My Style Life Insurance	https://www.suncorp.com.au/insurance/life/mystyle.html
+2	Story Safety	https://www.suncorp.com.au/insurance/safety.html
+3	Trov On-demand Insurance	https://www.suncorp.com.au/insurance/trov.html
+4	AAMI Business Insurance	https://www.aami.com.au/business-insurance.html
+The carousel can be scrolled right or left. When scrolled it will advance one component at a time.
+
+8	
+'Our Brands' Carousel
+A 'Our Brands' carousel is displayed with a high level brand description of the services and products offered by eleven Suncorp Group brands.
+Brands are displayed in the following order:
+ 
+BRAND
+BRAND DESCRIPTION
+URL
+1	SUNCORP	
+Suncorp exists to create a better today for everyone. We champion financial wellbeing by making financial opportunity clearer, choice narrower and action easier. Our goal is to be there in the moments that matter. To help all Australians feel more optimistic about their personal finances. Let’s get doing.
+http://www.suncorp.com.au/
+2	TERRI SCHEER	Terri Scheer is Australia’s leading landlord insurance specialist. Landlord Insurance is all that we do, our insurance products can protect you from loss caused by tenants that standard building home and contents insurance may not cover.	https://www.terrischeer.com.au/
+3	VERO	Supported by over 180 years of experience, Vero provides market leading insurance products and solutions to businesses of all sizes. From small start-ups right through to some of Australia’s largest corporations, our focus is to help you succeed in business	http://www.vero.com.au/vero
+4	AAMI	AAMI has been looking out for Australians for over 45 years. And just as we pledged all those years ago, you’ll still speak to a real person 24 hours a day, 7 days a week, or if you’d prefer you can also manage your policy or claim via our industry leading online tools. Service anytime, anywhere, proving once again why it’s lucky you’re with AAMI.	https://www.aami.com.au/
+5	ASTERON LIFE	Asteron Life is a specialist life insurance company backed by over 180 years of experience. To us, life insurance is all about ‘celebrating life’ and getting the most out of today while helping protect our customers against the uncertainties of the future.	
+http://www.asteronlife.com.au/
+6	APIA	At Apia, we realise that the more you live life, the better you get at it. Specialists in insurance for over 50s, Apia story began over 30 years ago, and we have the same goal as we did when it first began: to provide the best possible products and service for experienced Australians.	http://www.apia.com.au/
+7	BINGLE	Bingle have one main goal in mind – to provide no-fuss, low-cost, car insurance aimed at smart drivers. That’s why we do things online. It means we can cut out some pricey overheads – and put those savings towards more affordable policies. Saving time, saving money, and staying covered. As simple as it sounds.	https://www.bingle.com.au/
+8	CIL	Formed in 1962, CIL is Australia’s largest and most established caravan and recreational vehicles (RV) insurance specialist. Unlike others, providing insurance for caravans, motorhomes and camper trailers is all that CIL does. Decades of RV experience means a greater understanding of the insurance needs of RV owners.	http://www.cilinsurance.com.au/
+9	GIO	Since 1927, GIO has helped generations of customers feel better protected providing certainty to those who want to leave nothing to chance. With a range of insurance products and a credible history like ours, we know you can trust us to get the job done, just like we have been for 90 years.	https://www.gio.com.au/
+10	RESILIUM	Welcome to Resilium. Since 1958, we’ve been providing trusted insurance advice and dedicated customer service. We proudly remain true to our founding ideals – being customer-focussed, staying experts in our field. Our advisers specialise in creating dependable relationships and have a desire to make the insurance landscape simple and clear.	http://www.resilium.com.au/
+11	SHANNONS	Shannons was founded by the late Robert Shannon who created a unique insurance business in the early Seventies - run by Enthusiasts for Enthusiasts. Today, Shannons is a national brand, covering the insurance needs of Motoring Enthusiasts, for their Special Cars, Motorcycles, Daily Drives and their Home. In the NSW market Shannons also offers CTP insurance (underwritten by GIO). 	https://www.shannons.com.au/
+The carousel can be scrolled right and left. When scrolled it will advance one component at a time. The icon of given brand can also be selected directly.
+The logo of the active brand is displayed in colour.
+
+9	
+Links to Other Suncorp Self Service Applications
+Links to other Suncorp insurance self service applications are available on the main Marketplace page and the policy details page
+ 
+LINK NAME
+LINKS TO
+1	My Suncorp Insurance policies	Suncorp Policy Self Service
+2	My Suncorp Insurance claims	Suncorp My Claim Manager (Claim Self Service)
+A link to Suncorp Internet Banking is available on the Banking tab of the portfolio display.
+
+ 
+
+10	
+Add Policy
+1. Policy Alert
+When a policy is eligible for display in Marketplace but has not previously been added an alert is displayed at the top of the 'Insurance Policies' section, refer image #1. For security and privacy the prompt intentionally does not indicate the number, brand or type of cover of any missing policies.
+When the 'Add a policy' button is selected a pop-up is displayed to enable a policy number to be entered, refer image #2.
+2. Add Policy
+The pop-up display the brands whose policies can be displayed in Marketplace together with a field for a missing policy number to be added.
+The missing policy number is to be entered in to input field and the 'Add my policy' button selected.
+For a missing QLD CTP policy the CTP certificate number is to be used in lieu of a policy number
+A maximum of one policy number can be added at a time. Where there are multiple missing policies this process must be repeated for each.
+For a policy to be successfully added for display in Suncorp Marketplace all of the following criteria must be met:
+the policy number must be valid
+the policy type must be valid for display in Suncorp Marketplace
+the customer must be a policyholder of the policy number entered
+3. Policy Add Confirmation
+When all validation checks have completed successfully and the policy has been added to the customer's portfolio is GCIS a confirmation pop-up is displayed, refer image #3. Where there are other policies eligible for display text will be included to indicate this.
+When the pop-up is closed and the portfolio summary is displayed the newly added policy will be present.
+Add Bank Account
+A user must manually add each account they wish to view in Suncorp Marketplace. When successfully added that account is subsequently displayed automatically.
+1. Bank Account Alert
+When an account is eligible for display in Marketplace but has not previously been added an alert is displayed at the top of the 'Suncorp Bank Accounts' section. For security and privacy the prompt intentionally does not indicate the number or type of missing accounts.
+When the 'Add a account' button is selected a pop-up is displayed to enable an account number to be entered.
+2. Add Bank Account
+As per 'Add Policy' except the wording is changed to reflect account instead of policy and no brand logos are displayed.
+For an account to be successfully added for display in Suncorp Marketplace all of the following criteria must be met:
+the account number must be valid
+the account type must be valid for display in Suncorp Marketplace
+the customer must be an account holder of the account number entered
+the Suncorp Bank 'customer entitlement check' must be passed
+3. Bank Account Add Confirmation
+As per 'Policy Add Confirmation' except the wording is changed to reflect account instead of policy
+Error Handing
+An error message will be displayed should any of the following errors occur during the add policy/account process.
+Insurance product/bank product number not found
+Insurance product/bank product type not supported
+Insurance product/bank product already displayed in Suncorp Marketplace
+1. Policy Alert
+
+2. Add Policy
+
+3. Policy Add Confirmation
+
+4. Insurance Product Not Supported
+ 
+
+11	
+Linking an Insurance Self Service Account to a Banking Self Service Account
+Customers have the ability to link their Suncorp insurance self service and internet banking self-service accounts.
+For customers wishing to link accounts the linking process is the same for token and non-token internet banking customers.
+Once linked the next time the 'Link to Internet' button is selected:
+by a non-token customer they will be automatically displayed the internet banking home page without having enter any credentials
+by a token customer they will be displayed a logon page to enter their token code (user ID and password not required) and then displayed the internet banking home page
+For Customers not wishing to link accounts they will still be able to access internet banking however they will need to provide their user ID, password and token code (when applicable) each time they access internet banking.
+ 
+ 
+ 
+ 
+1. Internet Banking (IB) Logon Link
+The 'Logon to Internet Banking' button links to the Internet Banking link flow
+
+
+2. Internet Banking (IB) Link - Logon Form
+The first page of the IB Link flow requires the customer to enter their existing IB credentials.
+
+3. Internet Banking Link - Accept / Decline Linking
+If the customer successfully enters their IB credentials they will be asked if they wish to link Insurance Self-Service to their IB account.
+If 'Allow' is chosen linking will be attempted, refer #4 below.
+If 'Deny' is chosen they will be taken directly to the IB landing page as per #5 below.
+ 
+
+4. Internet Banking Link - Link Successful
+When linking is successful the below message is displayed. The customer can then continue to Internet Banking.
+ 
+
+5. Internet Banking Link - Link Unsuccessful
+When linking is unsuccessful the below message is displayed. The customer can then continue to Internet Banking.
+
+
+
+6. Internet Banking Link - IB Home Page
+At the end of the linking process the customer will land on the Internet Banking home page.
+
+7. Internet Banking Link - Token Capture for Returning Customer
+If a returning customer with a linked account uses token authentication for login they will be required to enter the token number before accessing their Internet Banking account.
+. 
+  
+Technical Information
+API
+Once a user has been authenticated to access Suncorp Marketplace a series of API calls are made to obtain details of the products held by the user for display in Suncorp Marketplace. 
+Portfolio API
+The Customer database (GCIS) is called using the Portfolio API. This API provides a summary of Suncorp Group products owned by that user.
+Product API 
+When the Portfolio API response indicates the customer owns a general insurance product the Customer database (GCIS) is called using the Product API. This API provides specific details for the requested product. Where a customer owns multiple insurance products the Product API is called for each product.
+DIS ‘Find Account Details’ API
+When the Portfolio API response indicates the customer owns a bank product the Bank is called directly using the DIS 'Find Account Details' API. This API provides specific details for the requested product. Where a customer owns multiple bank products the DIS 'Find Account Details' API is called for each product. 
+Product Whitelist
+Where a product is not on the whitelist that product is not eligible for display in Suncorp Marketplace. 
+Data Mapping
+Data obtained from the Product API and DIS 'Find Account Details' API undergoes a mapping process before it is displayed in Suncorp Marketplace.  Refer attached spreadsheet for whitelist details - Supported Products.xlsx 
+Insurance Mapping
+Insurance product mapping has two layers of data mapping refer below. Data is either custom mapped or mapped as is. Refer attached spreadsheet for details - Mapping - Insurance.xlsx
+From the Product API to the GI Policy API
+From the GI Policy API to the OSP Frontend API
+ 
+Bank Mapping
+Bank product mapping has a single layer of mapping. From the DIS API to the OSP Frontend API. Data is either custom mapped or mapped as is. Refer attached spreadsheet for details - Mapping - Bank.xlsx
+ 
+ 
+ 
+Likeundefined likes this
+No labels Edit Labels
+User icon: Add a picture of yourself
+Write a comment…
+Powered by Atlassian Confluence 6.4.3 Report a bug Atlassian News
+Atlassian
