@@ -1,0 +1,41 @@
+Spring Lookup
+
+
+Spring lookup method injection is the process of dynamically overriding a registered bean method.
+
+The bean method should be annotated with @Lookup.
+
+Spring returns the lookup result matched by the method's return type.
+
+@Component
+public class MySingletonBean {
+
+    public void showMessage(){
+        MyPrototypeBean bean = getPrototypeBean();
+        //each time getPrototypeBean() call
+        //will return new instance
+    }
+
+    @Lookup
+    public MyPrototypeBean getPrototypeBean(){
+        //spring will override this method
+        return null;
+    }
+}
+In above example the method getPrototypeBean is returning null. That doesn't matter, because this method will actually be overridden by spring dynamically. Spring uses CGLIB library to do so.
+
+
+The dynamically generated code will look for the target bean in the application context. Something like this:
+
+    ...
+
+public MyPrototypeBean getPrototypeBean(){
+   return applicationContext.getBean(MyPrototypeBean.class);
+}
+    ...
+
+
+For dynamic code generation to work, we have to follow these conditions on the bean class :
+The bean class cannot be final.
+The method annotated with @Lookup, cannot be private , static or final
+The factory approach of JavaConfig doesn't work i.e. a factory method annotated with @Bean and returning a manually created instance of the bean doesn't work. Since the container is not in charge of creating the instance, therefore it cannot create a runtime-generated subclass on the fly. So we have to use component scanning approach as described here

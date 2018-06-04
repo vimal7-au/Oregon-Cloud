@@ -4,4 +4,19 @@ Factory beans are mostly used to implement framework facilities. Here are some e
 
 When looking up an object (such as a data source) from JNDI, you can use JndiObjectFactoryBean.
 When using classic Spring AOP to create a proxy for a bean, you can use ProxyFactoryBean.
-When creating a Hibernate session factory in the IoC container, you can use LocalSessionFactoryBea
+When creating a Hibernate session factory in the IoC container, you can use LocalSessionFactoryBean
+
+
+
+
+
+How to create FactoryBean.
+
+Implement org.springframework.beans.factory.FactoryBean Interface.
+If your java class implement this interface, you must override below methods.
+getObjectType() : Return the class of the returned bean object.
+isSingleton() : true means the returned bean is a singleton type, otherwise return prototype type.
+getObject() : Return the instance of the factory generated bean class.
+Extends abstract class org.springframework.beans.factory.config.AbstractFactoryBean. If you extends this abstract class, you just need to override below two methods.
+getObjectType() : Return the class of the returned bean object.
+createInstance() : Return the instance of the factory generated bean class.
