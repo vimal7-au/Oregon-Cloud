@@ -1,0 +1,31 @@
+Big (Omega)
+
+
+
+
+Common Data Structures and Relative functions: Lists and Sets:
+
+
+
+Structure				get			add			remove		contains
+
+ArrayList				O(1)		O(1)*		O(n)		O(n)
+LinkedList				O(n)		O(1)		O(1)		O(n)
+HashSet					O(1)		O(1)		O(1)		O(1)
+LinkedHashSet			O(1)		O(1)		O(1)		O(1)
+TreeSet					O(log n)	O(log n)	O(log n)	O(log n)*
+
+ArrayList Notes:
+The add method on an ArrayList should be: O(1) amortized (and O(n) in worse case). Useful reference links:
+
+Constant Amortized Time
+
+Linked List vs ArrayList
+
+Maps:
+
+Structure			get	     	put			remove		containsKey
+
+HashMap	    		O(1)		O(1)		O(1)		O(1)
+LinkedHashMap		O(1)		O(1)		O(1)		O(1)
+TreeMap				O(log n)	O(log n)	O(log n)	O(log n)

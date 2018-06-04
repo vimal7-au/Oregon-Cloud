@@ -1,0 +1,7 @@
+Factory beans
+
+Factory beans are mostly used to implement framework facilities. Here are some examples:
+
+When looking up an object (such as a data source) from JNDI, you can use JndiObjectFactoryBean.
+When using classic Spring AOP to create a proxy for a bean, you can use ProxyFactoryBean.
+When creating a Hibernate session factory in the IoC container, you can use LocalSessionFactoryBea

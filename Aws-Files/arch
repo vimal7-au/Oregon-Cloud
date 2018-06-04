@@ -1,0 +1,18 @@
+arch:-
+
+
+Suncorp Marketplace is a digital platform which:
+- Collects and displays a customer's Suncorp Group products (e.g. Insurance and Banking) in a single place
+provides access to information, offers and rewards
+- Collates and displays a customer's portfolio of Suncorp Group insurance and banking products across a range of brands in a single place
+provides access to a range of products, tools and services from across the Suncorp Group.
+provides seamless access between insurance and banking self service accounts when linked.
+
+Developed as a Microservice Layered Architecture on SpringBoot, Spring Framework, and Deployed on AWS Platform
+Provides High Avaliabity and Highly Scalable System 
+
+
+The server side component for Marketplace API is protected by Axway API Gateway.
+The OpenID connect Implicit Flow Authentication method is used to protect the ServerSide.
+
+
