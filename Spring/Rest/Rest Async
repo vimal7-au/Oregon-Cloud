@@ -1,1 +1,13 @@
 Rest Async
+
+
+
+First – let’s go over the rules – @Async has two limitations:
+
+it must be applied to public methods only
+self-invocation – calling the async method from within the same class – won’t work
+
+
+
+
+Asynchronous support introduced in Servlet 3.0 offers the possibility to process an HTTP request in another thread. This is specially interesting when you have a long running task, since while another thread processes this request, the container thread is freed and can continue serving other requests.

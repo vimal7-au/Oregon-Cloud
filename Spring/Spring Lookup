@@ -38,4 +38,8 @@ public MyPrototypeBean getPrototypeBean(){
 For dynamic code generation to work, we have to follow these conditions on the bean class :
 The bean class cannot be final.
 The method annotated with @Lookup, cannot be private , static or final
-The factory approach of JavaConfig doesn't work i.e. a factory method annotated with @Bean and returning a manually created instance of the bean doesn't work. Since the container is not in charge of creating the instance, therefore it cannot create a runtime-generated subclass on the fly. So we have to use component scanning approach as described here
+The factory approach of JavaConfig doesn't work i.e. a factory method annotated with @Bean and returning a manually created instance of the bean doesn't work. Since the container is not in charge of creating the instance, therefore it cannot create a runtime-generated subclass on the fly. So we have to use component scanning approach as described here.
+
+
+
+https://www.logicbig.com/tutorials/spring-framework/spring-core/using-lookup-method.html

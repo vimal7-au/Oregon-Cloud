@@ -1,0 +1,23 @@
+Annotations
+
+
+@ConfigurationProperties
+
+@Configuration
+@EnableRetry
+@EnableAspectJAutoProxy
+@ImportResource("classpath:/retryadvice.xml")
+
+
+
+ @Retryable
+ @Recover
+
+
+
+
+  @Bean
+
+
+  @EnableConfigServer
+@SpringBootApplication
