@@ -17,3 +17,18 @@ void display() {
 void exec(Function function) {
     function.apply(100);
 }
+
+
+
+
+
+
+
+void extract() {
+    DoubleFunction<String> stringDoubleFunction = (t) -> String.valueOf(t);
+    display(stringDoubleFunction);
+}
+
+private void display(DoubleFunction<String> stringDoubleFunction) {
+    String apply = stringDoubleFunction.apply(455d);
+}
