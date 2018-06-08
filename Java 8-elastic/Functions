@@ -1,0 +1,19 @@
+Functions
+
+
+
+
+
+
+
+
+
+void display() {
+
+    Function<Integer, Integer> function1 = t -> (t - 5);
+    exec(function1);
+}
+
+void exec(Function function) {
+    function.apply(100);
+}

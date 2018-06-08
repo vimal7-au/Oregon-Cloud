@@ -11,3 +11,10 @@ self-invocation – calling the async method from within the same class – won�
 
 
 Asynchronous support introduced in Servlet 3.0 offers the possibility to process an HTTP request in another thread. This is specially interesting when you have a long running task, since while another thread processes this request, the container thread is freed and can continue serving other requests.
+
+
+
+
+Spring @Async
+Spring RestTemplate
+Spring + CompletableFuture
