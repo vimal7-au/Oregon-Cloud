@@ -1,0 +1,14 @@
+
+
+Instantiate
+Populate properties
+Name aware
+ApplicationContrextAware
+	• Constructor
+	• postProcessBeforeInitialization
+	• PostConstruct - init
+	• afterproperiesset
+	• Init
+	• postProcessAfterInitialization
+  
+functions

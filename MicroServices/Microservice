@@ -1,0 +1,91 @@
+Microservice
+
+
+
+Many organizations, such as Amazon, eBay, and Netflix, have solved this problem by adopting what is now known as the Microservices Architecture pattern. Instead of building a single monstrous, monolithic application, the idea is to split your application into set of smaller, interconnected services.
+
+Each functional area of the application is now implemented by its own microservice. Moreover, the web application is split into a set of simpler web applications (). This makes it easier to deploy distinct experiences for specific users, devices, or specialized use cases.
+
+The apps don’t, however, have direct access to the backend services. Instead, communication is mediated by an intermediary known as an API Gateway. The API Gateway is responsible for tasks such as load balancing, caching, access control, API metering, and monitoring, and can be implemented effectively using NGINX. Later articles in the series will cover the API Gateway.
+
+ Each service instance is a Docker container. In order to be highly available, the containers are running on multiple Cloud VMs. In front of the service instances is a load balancer such as NGINX that distributes requests across the instances. The load balancer might also handle other concerns such as caching, access control,API metering, and monitoring.
+
+The Microservices Architecture pattern significantly impacts the relationship between the application and the database. Rather than sharing a single database schema with other services, each service has its own database schema
+
+Pasted from <https://www.nginx.com/blog/introduction-to-microservices/?utm_source=service-discovery-in-a-microservices-architecture&utm_medium=blog> 
+
+
+
+
+
+
+• Microservices provide benefits…
+• Strong Module Boundaries: Microservices reinforce modular structure, which is particularly important for larger teams.
+
+• Independent Deployment: Simple services are easier to deploy, and since they are autonomous, are less likely to cause system failures when they go wrong.
+
+• Technology Diversity: With microservices you can mix multiple languages, development frameworks and data-storage technologies.
+• …but come with costs
+• Distribution: Distributed systems are harder to program, since remote calls are slow and are always at risk of failure.
+
+• Eventual Consistency: Maintaining strong consistency is extremely difficult for a distributed system, which means everyone has to manage eventual consistency.
+
+• Operational Complexity: You need a mature operations team to manage lots of services, which are being redeployed regularly.
+
+Pasted from <https://martinfowler.com/articles/microservice-trade-offs.html#boundaries> 
+
+Microservices: advantages
+The advantages of microservices seem strong enough to have convinced some big enterprise players – like Amazon, Netflix, and eBay – to begin their transitions. As opposed to more monolithic design structures, microservices…
+	• Improves fault isolation: larger applications can remain largely unaffected by the failure of a single module.
+	• Eliminates long-term commitment to a single technology stack: If you want to try out a new technology stack on an individual service, go right ahead. Dependency concerns will be far lighter than with monolithic designs, and rolling back changes much easier. The less code in play, the more flexible you remain.
+	• Makes it easier for a new developer to understand the functionality of a service.
+	• Portability
+	• Scalability - Easily scalable
+	• Each microservice is quite simple being focused on one business capability
+	• Microservices can be developed independently by different teams
+	• Microservices are loosely coupled
+	• Microservices can be developed using different programming languages and tools
+	
+	Pasted from <https://www.infoq.com/news/2014/05/microservices> 
+	
+	
+
+Pasted from <http://cloudacademy.com/blog/microservices-architecture-challenge-advantage-drawback/> 
+
+Microservices: drawbacks
+Just because something is all the rage around the industry, doesn’t mean it has no drawbacks. Here’s a list of some potential pain areas associated with microservices designs:
+• Developing distributed systems can be complex. By which I mean, because everything is now an independent service, you have to carefully handle requests travelling between your modules. There can be a scenario where one of the services may not be responding, forcing you to write extra code specifically to avoid disruption. Things can get more complicated when remote calls experience latency.
+• Multiple databases and transaction management can be painful.
+• Testing a microservices-based application can be cumbersome. Using the monolithic approach, we would just need to launch our WAR on an application server and ensure its connectivity with the underlying database. But now, each dependent service needs to be confirmed before you can start testing.
+• Deploying microservices can be complex. They may need coordination among multiple services, which may not be as straightforward as deploying a WAR in a container.
+
+
+DevOps Is a Must
+
+Pasted from <https://www.infoq.com/news/2014/05/microservices> 
+
+Interfaces Mismatch
+Services rely on the interfaces between them to communicate. Changing one service’s interface implies changing other services, observes Wootton:
+
+Pasted from <https://www.infoq.com/news/2014/05/microservices> 
+
+Code Duplication
+To avoid introducing “synchronous coupling into the system,” Wootton believes that sometimes is useful to add certain code to different services, leading to code duplication which is a “bad idea as every instance of the code will need to be tested and maintained going forward.” A solution would be to use a shared library between services but it “won't always work in a polyglot environment and introduces coupling which may mean that services have to be released in parallel to maintain the implicit interface between them.”
+
+Pasted from <https://www.infoq.com/news/2014/05/microservices> 
+
+The Complexity of a Distributed System
+As a distributed system microservices introduce a level of complexity and several issues to take care of, such as “network latency, fault tolerance, message serialization, unreliable networks, asynchronicity, versioning, varying loads within our application tiers etc.”
+Asynchronicity
+Wootton considers that microservices usually make use of asynchronous programming, messaging and parallelism, which can be complex when “things have to happen synchronously or transactionally,” requiring to “manage correlation IDs and distributed transactions to tie various actions together.”
+Testing
+Testing is another issue to consider when doing a microservices architecture since it may be “difficult to recreate environments in a consistent way for either manual or automated testing,
+
+Pasted from <https://www.infoq.com/news/2014/05/microservices> 
+
+
+
+Pasted from <http://cloudacademy.com/blog/microservices-architecture-challenge-advantage-drawback/> 
+
+
+
