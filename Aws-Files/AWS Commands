@@ -1,1 +1,5 @@
 AWS Commands
+
+
+
+aws lambda invoke --invocation-type RequestResponse --function-name arn:aws:lambda:us-west-2:505194636281:function:OregonL1 --region us-west-2 --log-type Tail response.txt
