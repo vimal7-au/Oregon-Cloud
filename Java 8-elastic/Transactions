@@ -1,0 +1,60 @@
+Inherently a transaction is characterized by four properties (commonly referred as ACID) :
+• Atomicity.
+• Consistency.
+• Isolation.
+• Durability.
+
+It’s very important to understand those, hence we will discuss each and every one of them as follows.
+1. Atomicity takes individual operations and turns them into an all-or-nothing unit of work, succeeding if and only if all contained operations succeed.
+2. A transaction might encapsulates a state change (unless it is a read-only one). A transaction must always leave the system in a consistent state, no matter how many concurrent transactions are inter-leaved at any given time.
+Consistency has the following characteristics:
+	• if one operation triggers secondary actions (CASCADE, TRIGGERS), those must also succeed otherwise the transaction fails .
+	• if the system is composed of multiple nodes, then consistency mandates that all changes be propagated to all nodes (multi-master replication). If slaves nodes are updated asynchronously then we break the consistency rule, the system becoming “eventually consistent“.
+	• a transaction is a data state transition, so the system must operate as if all transactions occur in a serial form even if those are concurrently executed.
+If there would be only one connection running at all times, then serializability wouldn’t impose any concurrency control cost. In reality, all transactional systems must accommodate concurrent requests, hence serialization has its toll on scalability. TheAmdahl’s law describes the relation between serial execution and concurrency:
+“The speed up of a program using multiple processors in parallel computing is limited by the time needed for the sequential fraction of the program.”
+As you’ll see later, most database management systems choose (by default) to relax consistency to achieve better concurrency.
+3. Isolation
+Transactions are concurrency control mechanisms, and they deliver consistency even when being interleaved. Isolation brings us the benefit of hiding uncommitted state changes from the outside world, as failing transactions shouldn’t ever corrupt the state of the system. Isolation is achieved through concurrency control using pessimistic or optimistic locking mechanisms.
+4. Durability
+A successful transaction must permanently change the state of a system, and before ending it, the state changes are recorded in a persisted transaction log. If our system is suddenly affected by a system crash or a power outage, then all unfinished committed transactions may be replayed.
+For messaging systems like JMS, transactions are not mandatory. That’s why we have non-transacted acknowledgement modes.
+File system operations are usually non-managed, but if your business requirements demand transaction file operations, you might make use a tool such as XADisk.
+While, messaging and file systems use transactions optionally, for database management systems transactions are compulsory. That’s the reason database connections define a default autocommit mode. ACID is mandated by the SQL Standard, hence all operations must be embedded in a database transaction. But for an enterprise application, the autocommit mode is something you’d generally avoid, since it performs badly and it doesn’t allow you to include multiple DML operations in a single atomic unit of work.
+ACID is old school. Jim Gray described atomicity, consistency and durability long before I was even born. But that particular paper doesn’t mention anything about isolation. This is understandable, if we think of the production systems of the late 70′s, which according to Jim Gray:
+“At present, the largest airlines and banks have about 10,000 terminals and about 100 active transactions at any instant”.
+So all efforts were spent for delivering consistency rather than concurrency. Things have changed drastically ever since, and nowadays even modest set-ups are able to run 1000 TPS.
+From a database perspective, the atomicity is a fixed property, but everything else may be traded-off for performance/scalability reasons.
+Playing with durability makes sense for highly performing clustered databases if the enterprise system business requirements don’t mandate durable transactions. But, most often durability is better off untouched.
+Although some database management systems offer MVCC, usually concurrency control is achieved through locking. But as we all know, locking increases the serializable portion of the executed code, affecting parallelization.
+The SQL standard defines four Isolation levels:
+	• READ_UNCOMMITTED
+	• READ_COMMITTED
+	• REPETABLE_READ
+	• SERIALIZABLE
+All but the SERIALIZABLE level are subject to data anomalies (phenomena) that might occur according to the following pattern:
+ISOLATION LEVEL	DIRTY READ	NON-REPETABLE READ	PHANTOM READ
+READ_UNCOMMITTED	allowed	allowed	allowed
+READ_COMMITTED	prevented	allowed	allowed
+REPETABLE_READ	prevented	prevented	allowed
+SERIALIZABLE	prevented	prevented	prevented
+But what are all those phenomena we’d just listed. Let’s discuss each and every one of them.
+1. Dirty read
+
+A dirty read happens when a transaction is allowed to read uncommitted changes of some other running transaction. This happens because there is no locking preventing it. In the picture above, you can see that the second transaction uses an inconsistent value as of the first transaction had rollbacked.
+2. Non-repetable read
+A non-repetable read manifests when consecutive reads yield different results due to a concurring transaction that has just updated the record we’re reading. This is undesirable since we end up using stale data. This is prevented by holding a shared lock (read lock) on the read record for the whole duration of the current transaction.
+3. Phantom read
+
+A phantom read happens when a second transaction inserts a row that matches a previously select criteria of the first transaction. We therefore end up using stale data, which might affect our business operation. This is prevented using range locks orpredicate locking.
+Even if the SOL standard mandates the use of the SERIALIZABLE isolation level, most database management system use a different default level.
+DATABASE	DEFAULT ISOLATION LEVEL
+Oracle	READ_COMMITTED
+MySQL	REPETABLE_READ
+Microsoft SQL Server	READ_COMMITTED
+PostgreSQL	READ_COMMITTED
+DB2	CURSOR STABILITY (a.k.a READ_COMMITTED)
+Usually, READ_COMMITED is the right choice, since not even SERIALIZABLE can protect you from a “lost update” where the read/write happen in different transactions (and web requests). You should take into consideration your enterprise system requirements and set up tests for deciding which isolation level best suits your needs.
+If you are interested in learning more about Transactions you can follow me on my blog, or on twitter since all this material will hopefully materialize in my open-source book.
+Now it's easier than ever to get started with MongoDB, the database that allows startups and enterprises alike to rapidly build planet-scale apps. Introducing MongoDB Atlas, the official hosted 
+Pasted from <https://dzone.com/articles/beginners-guide-acid-and> 

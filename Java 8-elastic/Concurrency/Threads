@@ -1,0 +1,1 @@
+Calling Thread.sleep with a lock held may lead to very poor performance or even deadlock. This is because Thread.sleep does not cause a thread to release its locks.

@@ -1,0 +1,26 @@
+A Strong reference is a normal reference that protects the referred object from collection by GC. i.e. Never garbage collects.
+
+A Soft reference is eligible for collection by garbage collector, but probably won't be collected until its memory is needed. i.e. garbage collects before OutOfMemoryError.
+
+A Weak reference is a reference that does not protect a referenced object from collection by GC. i.e. garbage collects when no Strong or Soft refs.
+
+A Phantom reference is a reference to an object is phantomly referenced after it has been finalized, but before its allocated memory has been reclaimed.
+
+
+
+
+
+Weak references
+
+A weak reference, simply put, is a reference that isn't strong enough to force an object to remain in memory. Weak references allow you to leverage the garbage collector's ability to determine reachability for you, so you don't have to do it yourself. You create a weak reference like this:
+
+WeakReference weakWidget = new WeakReference(widget);
+and then elsewhere in the code you can use  weakWidget.get() to get the actual  Widget object. Of course the weak reference isn't strong enough to prevent garbage collection, so you may find (if there are no strong references to the widget) that  weakWidget.get() suddenly starts returning null.
+
+...
+
+Soft references
+
+A soft reference is exactly like a weak reference, except that it is less eager to throw away the object to which it refers. An object which is only weakly reachable (the strongest references to it are WeakReferences) will be discarded at the next garbage collection cycle, but an object which is softly reachable will generally stick around for a while.
+
+SoftReferences aren't required to behave any differently than  WeakReferences, but in practice softly reachable objects are generally retained as long as memory is in plentiful supply. This makes them an excellent foundation for a cache, such as the image cache described above, since you can let the garbage collector worry about both how reachable the objects are (a strongly reachable object will never be removed from the cache) and how badly it needs the memory they are consuming.

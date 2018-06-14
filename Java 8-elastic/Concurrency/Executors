@@ -1,0 +1,66 @@
+Executors
+
+A main difference between the submit() and execute() method is that ExecuterService.submit()can return result of computation because it has a return type of Future, but execute() method cannot return anything because it's return type is void. The core interface in Java 1.5's Executor framework is the Executor interface which defines the execute(Runnable task) method, whose primary purpose is to separate the task from its execution.
+
+Read more: http://javarevisited.blogspot.com/2016/04/difference-between-ExecutorServie-submit-vs-Executor-execute-method-in-Java.html#ixzz4VnXbceyQ
+
+Pasted from <http://javarevisited.blogspot.com/2016/04/difference-between-ExecutorServie-submit-vs-Executor-execute-method-in-Java.html> 
+
+
+
+
+
+A main difference between the submit() and execute() method is that ExecuterService.submit()can return result of computation because it has a return type of Future, but execute() method cannot return anything because it's return type is void. The core interface in Java 1.5's Executor framework is the Executor interface which defines the execute(Runnable task) method, whose primary purpose is to separate the task from its execution.
+
+Any task submitted to Executor can be executed by the same thread, a worker thread from a thread pool or any other thread.
+
+On the other hand, submit() method is defined in the ExecutorService interface which is a sub-interface of Executor and adds the functionality of terminating the thread pool, along with adding submit() method which can accept a Callable task and return a result of computation.
+
+See Java Concurrency in Practice for more details on how thread pool works and how tasks are allocated between threads depending upon different types of thread pools.
+
+
+This was the fundamental difference between the submit() and execute() method of ExecutorService interface, let's see a couple of more points to answer this question better.
+
+
+Executor.execute() vs ExecutorService.submit() method
+As I told in the first paragraph that key difference between the execute() and submit() method is that former cannot return the result but later can result of computation. Before seeing more difference, let's see some similarities between the execute() and submit() as well:
+
+1) Both submit() and execute() methods are used to submit a task to Executor framework for asynchronous execution.
+
+2) Both submit() and execute() can accept a Runnable task.
+
+3) You can access submit() and execute() from the ExecutorService interface because it also extends the Executor interface which declares the execute() method.
+
+Apart from the fact that submit() method can return output and execute() cannot, following are other notable differences between these two key methods of Executor framework of Java 5.
+
+1) The submit() can accept both Runnable and Callable task but execute() can only accept the Runnable task.
+
+2) The submit() method is declared in ExecutorService interface while execute() method is declared in the Executor interface.
+
+3) The return type of submit() method is a Future object but return type of execute() method is void.
+
+Btw, Cay S. Horstmann has also covered this essential topic on good detail in his classic book, Core Java Volume 1 - Fundamentals, 10th Edition. You can refer that book for further reading on this topic.
+
+
+
+When to use submit() and execute() method in Java
+Once you understand the difference between Executor.execute() and ExecutorService.submit() method you have the knowledge to decide when to use submit() and when to use the execute() method.
+
+In general, if you are doing computational task e.g. calculating some risk stats, calculating factorial of large numbers or doing some time-consuming computation e which results in some value then use the submit() method. It immediately returns a Future object, which can be later queried to get the value of computation by calling get() method.
+
+Remember, get() is a blocking call so always call the version which accepts a timeout. While you can use the execute() method if you just want your code to be run in parallel by worker threads of the thread pool.
+
+Here is a nice summary of key differences between submit() vs execute() methods in Java:
+
+
+
+That's all about difference between ExecutorService.submit() and Executor.execute() method in Java. Remember, the key difference between them is that submit() return a Future but execute() return nothing.
+
+The thread pools created by Executors class always return a reference of ExecutorService, which provides access to both submit() and execute() method as it also extend the Executor interface, which is source of execute() method.
+
+Use submit() if your doing computation e.g. calculating value of pie, and use execute() if you just want the code to be run in parallel by worker threads of thread pool.
+
+
+Read more: http://javarevisited.blogspot.com/2016/04/difference-between-ExecutorServie-submit-vs-Executor-execute-method-in-Java.html#ixzz4VnfdbQWO
+
+Pasted from <http://javarevisited.blogspot.com/2016/04/difference-between-ExecutorServie-submit-vs-Executor-execute-method-in-Java.html> 

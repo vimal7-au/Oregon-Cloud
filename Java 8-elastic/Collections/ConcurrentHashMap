@@ -1,0 +1,29 @@
+ConcurrentHashMap
+
+
+
+
+Putting key-value pair: 
+
+1. Putting key-value pair in ConcurrentHashMap requires first identifying exact index in 
+    Segment array. 
+    (Once Segment array index is identified, Now flow will be exactly same as putting the data in 
+    hashmap/hashtable.) 
+2. After identifying index in Segment array, next task is to identify index of internal bucket/array 
+    present in internal hashmap as shown in figure above. 
+ 3. After identying bucket(internal array index), iterate key-value pairs and check each key with key 
+    to store, wherever match is found replace stored value with value to store.
+    If there is no match, store key-value pair at the last of list.
+
+
+Getting key-value pair:
+
+1. Getting key-value pair in ConcurrentHashMap requires first identifying exact index in 
+    Segment array. 
+    (Once Segment array index is identified, Now flow will be exactly same as getting the data from 
+    hashmap/hashtable.) 
+2. After identifying index in Segment array, next task is to identify index of internal bucket/array 
+    present in internal hashmap as shown in figure above. 
+3. After identying bucket(internal array index), iterate key-value pairs and match each key with 
+    given key, wherever match is found return value stored against key.
+    If there is no match, return null.
