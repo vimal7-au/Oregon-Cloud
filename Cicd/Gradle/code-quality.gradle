@@ -1,0 +1,66 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+checkstyle {
+    def configDir = "src/config"
+    sourceSets = [ project.sourceSets.main ]
+    configFile = new File("$configDir/checkstyle.xml")
+    configProperties = [
+            'checkstyle.header.file': "$configDir/suncorp_header.txt",
+            'checkstyle.suppressions.file': "$configDir/checkstyle_suppressions.xml"
+    ]
+}
+
+pmd {
+    pmdTest.enabled = false
+    ignoreFailures = true
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/pmd")
+    ruleSets = [
+        "java-basic",
+        "java-clone",
+        "java-codesize",
+        "java-design",
+        "java-empty",
+        "java-finalizers",
+        "java-optimizations",
+        "java-strictexception",
+        "java-strings",
+        "java-typeresolution",
+        "java-unnecessary",
+        "java-unusedcode"
+    ]
+}
+
+
+findbugs{
+    ignoreFailures = true
+    findbugsTest.enabled = false
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+}
+
+tasks.withType(Pmd){
+    reports{
+        xml.enabled = true
+        html.enabled = false
+    }
+}
+
+task pmdMainHtml {
+    doLast {
+        ant.xslt(in: pmdMain.reports.xml.destination,
+            style: file("${project.rootDir}/src/config/pmd-nicerhtml.xsl"),
+            out: new File(pmdMain.reports.xml.destination.parent, 'main.html'))
+    }
+}
+pmdMain.finalizedBy pmdMainHtml
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}

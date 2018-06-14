@@ -1,0 +1,12 @@
+apply plugin: 'org.sonarqube'
+
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", project.group + ":" + projectName
+        property "sonar.projectName", projectName
+        property "sonar.projectVersion", project.version
+        property "sonar.host.url", "https://sonar.int.corp.sun"
+        property "sonar.login", sonarQubeLoginToken
+    }
+}

@@ -1,0 +1,40 @@
+Streams :- 
+
+
+Finding the Last element in a stream :
+
+1. Using the Reduce API
+
+Reduce, simply put, reduces the set of elements in a Stream to a single element.
+
+In this case, we’ll reduce the set of elements to get the last element fn the Stream. Keep in mind that this method will only return deterministic results for sequential Streams.
+
+Let’s use a List of String values, get the Stream from the List and then reduce:
+List<String> valueList = new ArrayList<>();
+valueList.add("Joe");
+valueList.add("John");
+valueList.add("Sean");
+ 
+Stream<String> stream = valueList.stream();
+stream.reduce((first, second) -> second)
+  .orElse(null);
+Here, the stream is reduced to a level where it is left with only the last element. If the stream is empty it will return a null value.
+
+2. Using the Skip Function
+
+The other way to get the last element of the stream is by skipping all the elements before it. This can be achieved using Skip function of Stream class. Keep in mind that in this case, we are consuming the Stream twice so there is some clear performance impact.
+
+Let’s create a List of string values and use its size function to determine how many elements to skip to reach the last element.
+
+Here is the example code getting the last element using skip:
+
+List<String> valueList = new ArrayList<String>();
+valueList.add("Joe");
+valueList.add("John");
+valueList.add("Sean");
+ 
+long count = valueList.stream().count();
+Stream<String> stream = valueList.stream();
+    
+stream.skip(count - 1).findFirst().get();
+“Sean” ends up being the last element.

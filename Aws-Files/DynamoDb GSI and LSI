@@ -1,0 +1,22 @@
+DynamoDb GSI and LSI
+
+1) Partition key == Hash key
+2) Range key == Sort Key
+3) Sort key == Range Key
+4) Hash key == Partition key
+
+
+In case, the table has only a partition key, it must be unique in the whole table. In other words, no two items in the table can have the same partition key value. From that perspective, in such senarios, partiton key is same as primary key used in traditional RDBMS. Partition key of an item is also termed as hash key or hash attribute.
+
+Composite partition key is also referred to as composite primary key or hash-range key. When the table has both, partition key and sort key, it is called as composite partition key. In other words, a composite partition key comprises of two attributes such as partition key and sort key. Sort key of an item is also termed as range key or range attribute.
+
+
+With composite partition key, DynamoDB determines the hash of the partition in which item needs to be stored based on the item’s partition key, and, put the record in the partition in sorted manner based on the sort key. All items with the same partition key are stored together, in sorted order by sort key value.
+
+
+At any point of time, the combination of partition and sort key must be unique.
+
+
+When you create tables in DynamoDB, you must specify primary key attributes. These primary key attributes can then be used to retrieve data from your tables.
+
+To more efficiently find your data, DynamoDB creates indexes for those attributes. Sometimes, however, you may need to query data using an attribute that’s not in one of your primary keys. This is where secondary indexes can help.
