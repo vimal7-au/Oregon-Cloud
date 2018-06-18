@@ -3,10 +3,12 @@ Aws:
 	Kinesis Streams
 	Route 53
 	VPC
-	Security Group
 	ELB
+	Security Group
 	Subnet
+	NACL
 	Nat-Gateway
+	I-Gateway
 	Lambdas
 	CloudFront
 	SNS
@@ -20,8 +22,7 @@ Aws:
 	IAM
 	ElasticSearch
 
-Terraform	
-
+Terraform :-
 	Plan
 	Apply
 	Destroy
@@ -58,10 +59,8 @@ CompleteableFuture, Thread pool
 Consul provides, service discovery, health monitoring and config services.
 
 
-
 https://howtodoinjava.com/spring/spring-cloud/spring-hystrix-circuit-breaker-tutorial/
 http://www.baeldung.com/introduction-to-hystrix
-
 
 
 Service-Discovery

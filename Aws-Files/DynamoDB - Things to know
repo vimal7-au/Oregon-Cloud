@@ -1,0 +1,122 @@
+
+Amazon DynamoDB is a managed NoSQL service with strong consistency and predictable performance that shields users from the complexities of manual setup.
+
+Whether or not you’ve actually used a NoSQL data store yourself, it’s probably a good idea to make sure you fully understand the key design differences between NoSQL (including Amazon DynamoDB) and the more traditional relational database (or “SQL”) systems like MySQL.
+
+First of all, NoSQL does not stand for “Not SQL“, but “Not Only SQL“. The two are not opposites, but complementary. NoSQL designs deliver faster data operations and can seem more intuitive, while not necessarily adhering to the ACID (atomicity, consistency, isolation, and durability) properties of a relational database.
+
+There are many well-known NoSQL databases available, including MongoDB, Cassandra, HBase, Redis, Amazon DynamoDB, and Riak. Each of those was built for a specific range of uses and will therefore offer different features. We could group those databases into columnar (Cassandra, HBase), key-value store (DynamoDB, Riak), document-store (MongoDB, CouchDB), and graph (Neo4j, OrientDB) categories.
+
+In this post, I’m going to focus on Amazon DynamoDB – the giant of the NoSQL world. I believe it’s become a giant because Amazon.com built it for their own operations. Considering how much was at stake financially, anything less than complete reliability would simply not be tolerated. Software created in such a demanding environment and using the resources of an Amazon.com is bound to be epic. The result? Fantastic reliability and durability, and blazing fast service.
+
+Like any other AWS product, Amazon DynamoDB was designed for failure (i.e., it has self-recovery and resilience built in). That makes DynamoDB a highly available, scalable, and distributed data store. Here are ten key features that helped make Amazon DynamoDB into a giant.
+
+1. Amazon DynamoDB is a managed, NoSQL database service:
+
+With a managed service, users only interact with the running application itself. You don’t need to worry about things like server health, storage, and network connectivity. With Amazon DynamoDB, AWS provisions and runs the infrastructure for you. Some of DynamoDB’s critical managed infrastructure features include:
+
+Automatic data replication over three availability-zones in a single region.
+Infinitely scalable read-write I/O running on IOPS-optimized solid state drives.
+A provisioned-throughput model where read and write units can be adjusted at any time based on actual application usage.
+Data backed up to S3.
+Integrated with other AWS services like Elastic MapReduce (EMR), Data Pipeline, and Kinesis.
+Pay-per-use model – you never pay for hardware or services you’re not actually using.
+Security and access control can be applied using Amazon’s IAM service.
+2. Amazon DynamoDB has Predictable Performance:
+
+AWS claims that DynamoDB will deliver highly predictable performance. Considering Amazon’s reputation for service delivery, we tend to take them at their word on this one. You can actually control the quality of the service you’ll get by choosing between Strong Consistency (Read-after-Write) or Eventual Consistency. Similarly, if a user wants to increase or decrease the Read/Write throughput they’ll experience, they can do it through simple API calls. Amazon DynamoDB also offers what they call Provisioned Capacity, where you can “bank” up to five minutes of unused capacity, which, like the funds in an emergency bank account, you can use during short bursts of activity.
+
+3. Amazon DynamoDB is designed for massive scalability
+
+Being an AWS product, you can assume that Amazon DynamoDB will be extremely scalable. With their automatic partitioning model, as data volumes grow, DynamoDB invisibly spreads the data across partitions and raises throughput. This requires no intervention from the user.
+
+4. Amazon DynamoDB data types
+
+DynamoDB supports following data types:
+
+Scalar – Number, String, Binary, Boolean, and Null.
+Multi-valued – String Set, Number Set, and Binary Set.
+Document – List and Map.
+Scalar types are generally well understood. We’ll focus instead on multi-valued and document types. Multi-valued types are sets, which means that the values in this data type are unique. For a months attribute you can choose a String Set with the names of all twelve months – each of which is, of course, unique.
+
+Similarly, document types are meant for representing complex data structures in the form of Lists and Maps. See this example:
+
+
+5. Amazon DynamoDB’s Data Model:
+
+DynamoDB uses three basic data model units, Tables, Items, and Attributes. Tables are collections of Items, and Items are collections of Attributes.
+
+Attributes are basic units of information, like key-value pairs. Tables are like tables in relational databases, except that in DynamoDB, tables do not have fixed schemas associated with them. Items are like rows in an RDBMS table, except that DynamoDB requires a Primary Key. The Primary Key in DynamoDB must be unique so that it can find the exact item in the table. DynamoDB supports two kinds of Primary Keys:
+
+Hash Type Primary Key: If an attribute uniquely identifies an item, it can be considered as Primary. DynamoDB builds a hash index on the attribute to facilitate the uniqueness. A Hash Key is mandatory in a DynamoDB table.
+Hash and Range Type Primary Key: This type of Primary Key is built upon the hashed key and the range key in the table: a hashed index on the hash primary key attribute, and a range sort index on the range primary key attribute. This type of primary key allows for AWS’s rich query capabilities.
+6. Amazon DynamoDB indexes
+
+There are two types of indexes in DynamoDB, a Local Secondary Index (LSI) and a Global Secondary Index (GSI). In an LSI, a range key is mandatory, while for a GSI you can have either a hash key or a hash+range key. GSIs span multiple partitions and are placed in separate tables. DynamoDB supports up to five GSIs. While creating a GSI, you need to carefully choose your hash key because that key will be used for partitioning.
+
+Which is the right index type to use? Here are two considerations: LSIs limit item size to 10 GB, and GSIs offer only eventual consistency.
+
+7. Amazon DynamoDB partitions
+
+In DynamoDB, data is partitioned automatically by its hash key. That’s why you will need to choose a hash key if you’re implementing a GSI. The partitioning logic depends upon two things: table size and throughput.
+
+Amazon DynamoDB - partitions
+
+The partition for a table is calculated by DynamoDB. Although it is transparent to users, you should understand the logic behind this.
+
+Amazon DynamoDB - calc
+
+(Note: Read Capacity Units – RCU – are measured in 4KB/sec. Write Capacity Units – WCU – are measured in 1KB/sec.)
+
+According to this formula, if we have a table size of 16 GB and we have 6000 RCUs and 1000 WCUs, then:
+
+# of partitions by throughput: 6000/3000+1000/1000 = 3
+
+# of partitions by size: 16/10 = 1.6
+
+So, the # of partitions in total: max(1.6, 3) = 3
+
+Therefore, we will require three partitions. The RCUs and WCUs will be uniformly distributed across the partitions. Here, RCUs per partition will be 3000/3 = 1000. RCUs and the WCUs will be 1000/3 = 333 WCUs. The data per partition will be 16/3 = 5.4 GB per partitions.
+
+8. Amazon DynamoDB streams
+
+DynamoDB streams are like transactional logs for a table. According to the DynamoDB Developer’s Guide:
+
+A DynamoDB stream is an ordered flow of information about changes to items in an Amazon DynamoDB table. When you enable a stream on a table, DynamoDB captures information about every modification to data items in the table.
+
+Streams are applied only to tables, and each stream record appears exactly once in a stream. AWS maintains separate endpoints for DynamoDB and DynamoDB streams. There are all kinds of scenarios where streams can be useful like, for instance, a messaging application where a message or picture that is updated to a group must be reflected in the message boxes of all the group members. Or for sending welcome messages to new customers when they sign up for your service.
+
+9. Amazon DynamoDB integration with Amazon EMR and Redshift
+
+NoSQL and Big Data technologies are often discussed together, because they both share the same distributed and horizontally scalable architecture, and both aim to provide high volume, structured, and semi-structured data processing. In a typical scenario, Elastic MapReduce (EMR) performs its complex analysis on datasets stored on DynamoDB. Users will often also use AWS Redshift for data warehousing, where BI tasks are carried out on data loaded from DynamoDB tables to Redshift.
+
+10. Amazon DynamoDB JavaScript Web
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://cloudacademy.com/blog/amazon-dynamodb-ten-things/

@@ -7,3 +7,20 @@ management:
     export:
       atlas:
         enabled: false
+
+
+
+
+Configuring Existing Endpoints
+
+Each endpoint can be customized with properties using the following format: endpoints.[endpoint name].[property to customize]
+
+Three properties are available:
+
+id – by which this endpoint will be accessed over HTTP
+enabled – if true then it can be accessed otherwise not
+sensitive – if true then need the authorization to show crucial information over HTTP
+
+endpoints.beans.id=springbeans
+endpoints.beans.sensitive=false
+endpoints.beans.enabled=true

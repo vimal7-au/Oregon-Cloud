@@ -1,0 +1,18 @@
+IGW and NAT Difference
+
+
+An Internet Gateway (IGW) allows resources within your VPC to access the internet, and vice versa. In order for this to happen, there needs to be a routing table entry allowing a subnet to access the IGW.
+That is to say - an IGW allows resources within your public subnet to access the internet, and the internet to access said resources.
+A NAT Gateway does something similar, but with two main differences:
+It allows resources in a private subnet to access the internet (think yum updates, external database connections, wget calls, etc), and
+it only works one way. The internet at large cannot get through your NAT to your private resources unless you explicitly allow it.
+
+
+
+
+IGW doesn't provide public ips, those are assigned by EC2 separately. An instance can have a public IP assigned without actually being able to route to the internet through a gateway.
+Additionally a NAT gateway:
+Uses an EIP
+Exists in a subnet
+Cannot be used by an instance in that subnet (you need to route to the NAT gateway from another subnet)
+Requires an IGW (the NAT gateway routes to an IGW to access the internet)
