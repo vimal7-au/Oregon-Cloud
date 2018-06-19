@@ -2,6 +2,7 @@ Rest Api Design Considerations:-
 
 1) Provide Links for Navigating through your API (HATEOAS)
 Hypermedia as the Engine of Application State is a principle that hypertext links should be used to create a better navigation through the API.
+
 A hypermedia-driven site provides information to navigate the site’s REST interfaces dynamically by including hypermedia links with the responses.
 A HATEOAS-based response would look like this:
 {
@@ -16,6 +17,7 @@ This response not only has the person’s name, but includes the self-linking UR
 	• href is a complete URL that uniquely defines the resource.
 
 	2) Error Handling
+
 	3)  Use content-type header
 	As you know everyday new format are created and used, recently XML was the format choice of the web server, but then JSON came along.
 	So, to keep your API flexible and extendable for future, it is important that we should build API for future not for today.
@@ -23,6 +25,7 @@ This response not only has the person’s name, but includes the self-linking UR
 	For example, if a user sends a request using text/xml, you could send back an XML response while another user could send an application/JSON request and you could reply with JSON.
 	By building this functionality into your API, you are able to adapt to these new format requests without impacting other users, or other aspects of your API.
 	This also means that you can stay on top of the technology curve without worrying about having to migrate users from one format to another, or from one API to another.
+
 	4) Use sub-resources for relations
 	Sub resources are used to link one resource with another, so use sub resources to represent the relation.
 	GET /groups/{group id}/members	Returns a list of members in group with given id
@@ -44,6 +47,7 @@ This response not only has the person’s name, but includes the self-linking UR
 	• OPTIONS – Retrieve information about what the Consumer is allowed to do with the Resource.
 	A good RESTful API will make use of the four and a half HTTP verbs for allowing third parties to interact with its data, and will never include actions / verbs as URL segments.
 	Typically, GET requests can be cached (and often are!) Browsers, for example, will cache GET requests (depending on cache headers), and will go as far as prompt the user if they attempt to POST for a second time. A HEAD request is basically a GET without the response body, and can be cached as well.
+	
 	Versioning
 	No matter what you are building, no matter how much planning you do beforehand, your core application is going to change, your data relationships will change, attributes will invariably be added and removed from your Resources. This is just how software development works, and is especially true if your project is alive and used by many people (which is likely the case if you’re building an API).
 	Remember than an API is a published contract between a Server and a Consumer. If you make changes to the Servers API and these changes break backwards compatibility, you will break things for your Consumer and they will resent you for it. Do it enough, and they will leave. To ensure your application evolves AND you keep your Consumers happy, you need to occasionally introduce new versions of the API while still allowing old versions to be accessible.

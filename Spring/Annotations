@@ -8,7 +8,7 @@ Annotations
 @EnableAspectJAutoProxy
 @ImportResource("classpath:/retryadvice.xml")
 
-
+  @RefreshScope
 
  @Retryable
  @Recover
@@ -21,3 +21,8 @@ Annotations
 
   @EnableConfigServer
 @SpringBootApplication
+
+
+@ConfigurationProperties
+@Configuration
+@EnableConfigurationProperties()

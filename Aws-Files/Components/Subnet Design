@@ -1,7 +1,7 @@
 Subnet Design
 
 
-
+One of the most important things to think about when creating your VPC is the design of your subnets. This matters a lot because you cannot change your subnets (well, not without disrupting your services and configuration!).
 
 
 

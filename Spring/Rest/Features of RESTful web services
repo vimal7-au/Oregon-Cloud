@@ -8,6 +8,10 @@ So, a client can directly access a RESTful Web Services using the URIs of the re
 Uniform interface: 
 Resources are manipulated using a fixed set of four create, read, update, delete operations: PUT, GET, POST, and DELETE.
 
+
+Cache:
+To improve network efficiency responses must be capable of being labeled as cacheable or non-cacheable.
+
 Client-Server: 
 A clear separation concerns is the reason behind this constraint. 
 Separating concerns between the Client and Server helps improve portability in the Client and Scalability of the server components.
@@ -16,8 +20,6 @@ Stateless:
 Each request from client to server must contain all the information necessary to understand the request,
 and cannot take advantage of any stored context on the server.
 
-Cache:
-To improve network efficiency responses must be capable of being labeled as cacheable or non-cacheable.
 
 Named resources:
 The system is comprised of resources which are named using a URL.
