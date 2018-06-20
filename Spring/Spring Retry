@@ -1,0 +1,7 @@
+Spring Retry
+
+
+
+Spring Retry provides an ability to automatically re-invoke a failed operation. This is helpful where the errors may be transient in nature (like a momentary network glitch). Spring Retry provides declarative control of the process and policy-based behavior that is easy to extend and customize.
+
+In this article, we’ll see how to use String Retry to implement retry logic in Spring applications. We’ll also configure listeners to receive additional callbacks.

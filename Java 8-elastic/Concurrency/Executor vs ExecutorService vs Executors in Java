@@ -1,0 +1,20 @@
+Executor vs ExecutorService vs Executors in Java
+
+1) One of the key difference between Executor and ExecutorService interface is that former is a parent interface while ExecutorService extends Executor i.e. it's a sub-interface of Executor.
+
+2) Another important difference between ExecutorService and Executor is that Executor defines execute() method which accepts an object of the Runnable interface, while submit() method can accept objects of both Runnable and Callable interfaces.
+
+
+3) The third difference between Executor and ExecutorService interface is that execute() method doesn't return any result, its return type is void but submit() method returns the result of computation via a Future object. This is also the key difference between submit() and execute() method, which is one of the frequently asked Java concurrency interview questions.
+
+
+4) The fourth difference between ExecutorService and Executor interface is that apart from allowing a client to submit a task, ExecutorService also provides methods to control the thread pool e.g. terminate the thread pool by calling the shutDown() method. You should also read "Java Concurrency in Practice" to learn more about the graceful shutdown of a thread-pool and how to handle pending tasks.
+
+Difference between Executor, ExecutorService and Executers class in Java
+
+
+
+5) Executors class provides factory methods to create different kinds of thread pools e.g. newSingleThreadExecutor() creates a thread pool of just one thread, newFixedThreadPool(int numOfThreads) creates a thread pool of fixed number of threads and newCachedThreadPool() creates new threads when needed but reuse the existing threads if they are available.
+
+
+Read more: https://javarevisited.blogspot.com/2017/02/difference-between-executor-executorservice-and-executors-in-java.html#ixzz5IwOOBJcv
