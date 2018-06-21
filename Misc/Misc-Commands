@@ -7,3 +7,9 @@ git config --global credential.helper wincred
 
 Mac :
 git config --global credential.helper cache
+
+
+
+
+Git
+git config --global ssh.variant ssh

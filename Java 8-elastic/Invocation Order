@@ -1,0 +1,11 @@
+Invocation Order
+
+1) Static Initialization Block - parent
+2) Static Initializaion Block - child
+
+
+3) Instance Initializaion Block - child
+4) Constructor - child
+
+5) Instance Initializaion Block - parent
+6) Conctructor - Parent
