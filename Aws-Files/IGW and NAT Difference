@@ -11,6 +11,7 @@ it only works one way. The internet at large cannot get through your NAT to your
 
 
 IGW doesn't provide public ips, those are assigned by EC2 separately. An instance can have a public IP assigned without actually being able to route to the internet through a gateway.
+
 Additionally a NAT gateway:
 Uses an EIP
 Exists in a subnet

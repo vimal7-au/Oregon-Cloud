@@ -1,0 +1,40 @@
+As much as AWS VPC offers security and flexibility, there are certain aspects of its design that are worth proper consideration prior to implementation. This is because if you do not lay out your VPC well enough, you may not leave yourself enough room for manoeuvre when your business grows or requirements change.  If that happens, you will have to spend time and money on migrating to a more suitable VPC. Below is a set of best practices I find useful when designing a VPC.
+
+1) You cannot change the IP CIDR block of your VPC after creation. If you realise down the line that your VPC is too small you will have to create a new one and migrate your instances. Make sure you plan for business growth and think a few years ahead. Currently, sizes between /28 and /16 are supported. If unsure, create a larger VPC rather than smaller.
+Updated on 21.12.2017: You can now add up to 4 more CIDRs if you need to expand your VPC. It is not possible to change the original CIDR though. Also, the original CIDR dictates what other IP spaces can be used. For example, if you use 10.x.x.x/24 than you can only add additional spaces from the RFC1918 10. space. To summarize, there are still some restrictions but if your outgrow your VPC, you can now just add another CIDR rather than migrate to a new VPC or work with multiple VPCs
+
+
+2) Make sure that your VPC IP CIDR does not overlap any network addresses in your office or your data centre. Also if you use multiple VPCs for application and / or environment isolation (recommended), make sure that you do not use the same or overlapping IP CIDRs between them. This is to avoid issues when you later want to connect your VPC via VPN to your company networks or if you want to use VPC peering to connect multiple VPCs.
+
+3) The minimum size of a subnet is a /28 (14 IP addresses). Remember that AWS reserves the first four IP addresses and the last 1 IP address for internal networking purposes. Note that some AWS services may require a few IP addresses. For example, elastic load balancers require a number of IP addresses to work and the number will change over time to support scaling and failover. Make sure you give yourself enough space.
+
+4) VPC spans across all availability zones in an AWS region. Subnets are availability zone specific. To achieve the highest possible fault tolerance, always create subnets for each tier in all availability zones. Distribute your address space evenly without creating disjoined address blocks. Always leave out a spare address block for each tier. (See my article on VPC design).
+
+5) Sizes of your subnets should be decided based on their purpose. If you come from a traditional networking background, remember that traditional subnet constraints such us broadcast domain limits do not apply in a VPC. Multicast and broadcast are not actually supported. You can create subnets with 1000s of instances if you need to.  Again, make sure you plan for business growth and think a few years ahead.
+
+6) When you create a subnet, it will be associated with the main route table automatically. If you need different routing for that subnet, create a new routing table, associate it with the subnet and modify the new route table. Never modify the main route table otherwise other subnets may be given routes they should not have upon creation.
+
+7) There is a default local route in every VPC routing table that enables intra subnet routing. The route cannot be deleted and you cannot create a more specific route than this. That means that the network within your VPC is flat regardless of how many subnets you have created and all resources can talk to each other. You separate resources using security groups (stateful firewalls) and NACLs (stateless firewalls). In terms of routing you only define ways out of the VPC (Internet Gateway, Virtual Private Gateway, NAT, VPC Peering, VPC endpoint) and not routes between your subnets.
+
+8) A subnet in AWS is not an isolation container for an application. Subnets should be instead decided based on their routing needs. For example, public subnets with a route to the Internet Gateway, VPN only subnets with a route to Virtual Private Gateway, Private subnets with a route to NAT gateways only, etc… Apart from routing considerations, you should, of course, create subnets across multiple availability zones for high availability (see point 4). You may also have specific security requirements that will require a network ACL on a specific address space. That could also constitute creating a separate subnet.
+
+9) Use Internet Gateway to enable internet access in your public subnets. Do not put application servers in the public subnets if they are to run behind Elastic Load Balancers unless you have a very good reason (for example bandwidth intensive processes). In most cases you should put ELBs in public subnets and application servers in private subnets for enhanced security.
+
+10) Network ACLs operate on the subnet level and do not filter traffic between instances in the same subnet. They are stateless which means that you will have to implement two rules. This adds extra complexity and is difficult to maintain. Use network ACLs sparingly to enforce baseline security policy by blacklisting.
+
+11) Security groups operate on the instance level. They are stateful and easy to configure and if you keep them simple, they are easy to maintain. They can reference other security groups in the same VPC. They should be your main tool to secure your VPC.
+
+12) Use VPC Peering so that multiple applications in separate VPCs can communicate securely. Traffic between instances in peered VPCs is private and isolated and there is no single point of failure or bandwidth bottleneck. VPC Peering can connect VPCs in multiple accounts but only within the same region. If you have applications running in multiple AWS regions, you will need to use VPN for secure communication.
+Updated on 21.12.2017: AWS has now announced VPC inter-region peering that encrypts with no single point of failure and no bandwidth bottleneck. Traffic is always routed through the AWS backbone network hence provides a high degree of isolation.
+
+13) Use NAT gateways if you need instances in a private subnet to communicate with the internet. For example if they need to access public AWS services such as dynamo DB or third party endpoints. NAT Gateways are fully managed, redundant, highly available and can handle up to 10Gbps of bursty traffic. The downside is that they do not offer (unlike Internet Gateways) multi-zone capability (A NAT Gateway has to be created per availability zone) and require elastic IPs.
+
+14) Use VPC endpoints to access S3 resources from within your VPC. They allow you to access to Amazon S3 resources (AWS promises to add more services at some point) securely from your instances without having to use Internet Gateway, VPN, or NAT. Both a VPC endpoint and an S3 bucket have to be in the same region though. Use IAM policies to control VPC access to Amazon S3 resources.
+Updated on 21.12.2017: AWS has released a new service called PrivateLink which is a collection of are API endpoints for a number of AWS services that can be added to your VPC and accessed securely as private endpoints.
+
+
+
+
+
+
+https://pajdzik.com/2016/08/01/cloud-architecture-best-practices-for-designing-a-virtual-private-cloud-vpn-on-aws/
