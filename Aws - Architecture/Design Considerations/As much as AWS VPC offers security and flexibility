@@ -1,3 +1,10 @@
+https://www.slideshare.net/gsilverm/aws-vpc-in
+
+
+
+
+
+
 As much as AWS VPC offers security and flexibility, there are certain aspects of its design that are worth proper consideration prior to implementation. This is because if you do not lay out your VPC well enough, you may not leave yourself enough room for manoeuvre when your business grows or requirements change.  If that happens, you will have to spend time and money on migrating to a more suitable VPC. Below is a set of best practices I find useful when designing a VPC.
 
 1) You cannot change the IP CIDR block of your VPC after creation. If you realise down the line that your VPC is too small you will have to create a new one and migrate your instances. Make sure you plan for business growth and think a few years ahead. Currently, sizes between /28 and /16 are supported. If unsure, create a larger VPC rather than smaller.
